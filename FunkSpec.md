@@ -30,11 +30,27 @@ Fontosabb szempontok:
 
 ### 5. Jelenlegi üzleti folyamatok modellje
 
+5.1.   Termékek egyesével való feltöltése különböző online értékesítési platformokra  
+5.2.   Termékek rendelésének kezelése (telefonon vagy emailen keresztül)  
+5.2.1. Rendelés felvitele az Excel táblázatban  
+5.2.2. Rendelés összekészítése és csomagolása  
+5.2.3. Rendelés futárral való kézbesítése  
+5.2.4. Excel táblázat frissítése
+
 
 ### 6. Igényelt üzleti folyamatok modellje
 
+6.1.   Termékek feltöltése a webshop felületére és adatbázisába
+6.2.   Termékek rendelésének kezelése (weboldalon keresztül, megerősítő emaileken keresztül)
+6.2.1. A felhasználó a kiválasztott terméket beteszi a kosarába, majd megrendeli
+6.2.2. A rendelés részletei láthatóak lesznek az admin felületen
+6.2.3. Rendelés összekészítése és csomagolása, megerősítő email elküldése
+6.2.4. Rendelés futárral való kézbesítése
+(6.3.  Adatbázis rendszer automatikus frissítése)
+
 
 ### 7. Követelménylista 
+
 
 
 ### 8. Használati esetek
