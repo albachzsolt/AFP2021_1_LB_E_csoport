@@ -1,6 +1,5 @@
 # Webshop követelmény specifikáció
 
-
 ### 1. Jelenlegi helyzet
 
 A Greenhub vállalkozásunk több, kifejezetten környezetbarát terméket árusít. Fontos számunkra, hogy a lehető legkisebb környezeti lábnyomot hagyjuk magunk után, ezért a nálunk kapható összes termék, vagy újrahasznosított alapanyagból, vagy biológiailag lebomló anyagból készül. Különösen figyelünk a termékek csomagolására is, nem használunk semmilyen műanyag csomagolóanyagot sem. Jelenleg csak vásárokban, illetve az online piactereken (Marketplace, Jófogás, Ebay) áruljuk termékeinket. Minden megrendelés telefonon vagy emailen keresztül történik, ezeket pedig egy egyszerű Excel táblázatban vezetjük. Ebben a táblázatban vezetve van, hogy ki mit vásárolt, a termékekből hány darabot kért, illetve, hogy hova kell küldenünk a csomagot. Minden vásárlás utánvétes csomagküldéssel kerül feladásra, kérhető csomagautómatába, illetve házhoz szállítva is. Sajnos az Excel táblázatban való nyilvántartás sokszor problémát okozott, nem került bele egy rendelés, rosszul lett felvéve/beírva és a végén előfordult, hogy az ügyfél rossz terméket kapott, illetve olyan is, hogy egyáltalán nem kapott terméket.
