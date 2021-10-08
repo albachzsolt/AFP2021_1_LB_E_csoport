@@ -45,3 +45,7 @@ kiszállítása után. Természetesen az ügyfelek regisztrációt követően vi
 4.3.2.3. kategóriák szerinti termék szűrés
 4.3.2.4. kosár
 4.4. Megrendelt, illetve kiszállított termékekre az ügyfelek értékelést tudnak leadni
+
+5. A rendszerre vonatkozó szabályok
+A web felület szabványos eszközökkel készüljön, html/css/javascript. Backend java nyelven írodjon és MySQL adatbázishoz csatlakozzon. Responsive megjelenés nem kell.
+A felhasználókat azonosító web oldalak esetében szükséges jogszabályokat be kell tartani: GDPR, ...
