@@ -51,6 +51,12 @@ Fontosabb szempontok:
 
 ### 7. Követelménylista 
 
+"User" felhasználói felület:
+
+
+
+"Admin" felhasználói felület:
+
 
 
 ### 8. Használati esetek
