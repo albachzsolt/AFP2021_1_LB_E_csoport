@@ -95,3 +95,20 @@ Karakterkódolás UTF8. Tábla és mezőneveknél snake_case konvenciót alkalma
 		- product_id, fk_ordered_items_products
 		- order_price
 		- quantity
+
+- Kategóriák tábla
+	- táblanév: categories
+	- mezők neve:
+		- id, PK
+		- name
+		- sequence
+
+- Értékelés tábla
+	- táblanév: ratings
+	- mezők neve:
+		- id, PK
+		- user_id, fk_ratings_users
+		- product_id, fk_ratings_products
+		- stars
+		- message
+		- rating_time
