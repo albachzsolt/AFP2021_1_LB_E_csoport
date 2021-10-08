@@ -29,3 +29,19 @@ kiszállítása után. Természetesen az ügyfelek regisztrációt követően vi
 3.2.3. Rendelés futárral való kézbesítése
 3.2.4. Excel táblázat frissítése
 
+4. Igényelt üzleti folyamatok
+4.1. Saját webshop ahol az összes termék megtalálható
+4.2. Különböző szintű belépési lehetőség -> admin és user
+4.3 Különböző menük a jogokhoz
+4.3.1. admin menü
+4.3.1.1. termékek feltöltése, módosítása, törlése
+4.3.1.2. kategóriák kezelése (hozzáadás, módosítás, törlés)
+4.3.1.3. kimutatások megtekintése 
+4.3.1.4. rendelések kezelése
+4.3.1.5. userek kezelése (törlés, módosítás)
+4.3.2. user menü
+4.3.2.1. rendelések megtekintése
+4.3.2.2. satát profil megtekintése illetve módosítása (name, username, password)
+4.3.2.3. kategóriák szerinti termék szűrés
+4.3.2.4. kosár
+4.4. Megrendelt, illetve kiszállított termékekre az ügyfelek értékelést tudnak leadni
