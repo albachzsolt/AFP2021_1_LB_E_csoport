@@ -65,3 +65,33 @@ Karakterkódolás UTF8. Tábla és mezőneveknél snake_case konvenciót alkalma
 		- password
 		- role
 		- enabled
+
+- Kosár tábla
+	- táblanév: baskets
+	- mezők neve:
+		- id, PK
+		- user_id, UQ, fk_baskets_users
+
+- Kosár tartalom tábla:
+	- táblanév: basket_items
+	- mezők neve:
+		- basket_id, fk_basket_items_baskets
+		- product_id, fk_basket_items_products
+		- quantity
+
+- Megrendelés tábla:
+	- táblanév: orders
+	- mezők neve: 
+		- id, PK
+		- user_id, fk_orders_users
+		- order_time
+		- status
+		- shipping_address
+
+- Megrendelt termékek tábla
+	- táblanév: ordered_items
+	- mezők neve:
+		- order_id, fk_ordered_items_baskets
+		- product_id, fk_ordered_items_products
+		- order_price
+		- quantity
