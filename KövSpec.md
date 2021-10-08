@@ -13,8 +13,8 @@ Minden vásárlás utánvétes csomagküldéssel kerül feladásra, kérhető cs
 ### 2. Megrendelői vízió (Vágyálom)
 
 Vállalkozásunk bővítése érdekében szeretnénk üzletünknek honlapot és egyúttal az adminisztrációnkat támogató rendszert. Szeretnénk, hogy ügyfeleink minden termékünket könnyedén megtalálhassák egy igényes és szép weboldalon.
-Szeretnénk nyilvántartásunkat online kezelni, hogy az ügyvezetők bárhonnan rá tudjanak nézni az aktuális információkra. A web oldal könnyen üzemeltethető legyen, lülön szintű belépési rendszerrel (admin, user). Termékeket fel lehessen tölteni, módosítani, különböző kategóriákba besorolni. 
-A kategóriákat ugyanúgy lehessen bővíteni, szerkezteni, törölni. Kimutatásokat szeretnénk elérni az oldalon keresztük, illetve egy áttekinhető külön oldalt, ahol azonnal látjuk, hány regisztrált ügyfelünk van, hány megrendelés és azok milyen státusban vannak, valamit hány termék van aktív, illetve törölt állapotban.
+Szeretnénk nyilvántartásunkat online kezelni, hogy az ügyvezetők bárhonnan rá tudjanak nézni az aktuális információkra. A web oldal könnyen üzemeltethető legyen, külön szintű belépési rendszerrel (admin, user). Termékeket fel lehessen tölteni, módosítani, különböző kategóriákba besorolni. 
+A kategóriákat ugyanúgy lehessen bővíteni, szerkeszteni, törölni. Kimutatásokat szeretnénk elérni az oldalon keresztül, illetve egy áttekinhető külön oldalt, ahol azonnal látjuk, hány regisztrált ügyfelünk van, hány megrendelés és azok milyen státusban vannak, valamit hány termék van aktív, illetve törölt állapotban.
 Szeretnénk ha az ügyfelek a vásárolt termékekről véleményt is írhatnak (szöveges illetve csillagos értékelést egyaránt), de csak a megrendelt temékek kiszállítása után. Természetesen az ügyfelek regisztrációt követően vissza tudják nézni a korábbi rendelésüket,  valamint azok állapotát.
 
 ### 3. Jelenlegi üzleti folyamatok
