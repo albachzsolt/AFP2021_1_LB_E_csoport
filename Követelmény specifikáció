@@ -20,3 +20,12 @@ kategóriákba besorolni. A kategóriákat ugyanúgy lehessen bővíteni, szerke
 külön oldalt, ahol azonnal látjuk, hány regisztrált ügyfelünk van, hány megrendelés és azok milyen státusban vannak, valamit hány termék van aktív, illetve törölt 
 állapotban. Szeretnénk ha az ügyfelek a vásárolt termékekről véleményt is írhatnak (szöveges illetve csillagos értékelést egyaránt), de csak a megrendelt temékek 
 kiszállítása után. Természetesen az ügyfelek regisztrációt követően vissza tudják nézni a korábbi rendelésüket, valamint azok állapotát. 
+
+3. Jelenlegi üzleti folyamatok
+3.1. Termékek egyesével való feltöltése különböző online értékesítési platformokra
+3.2. Termékek rendelés kezelése (telefonon vagy emailen keresztül)
+3.2.1. Rendelés felvitele az Excel táblázatban
+3.2.2. Rendelés összekészítése és csomagolása
+3.2.3. Rendelés futárral való kézbesítése
+3.2.4. Excel táblázat frissítése
+
