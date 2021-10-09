@@ -40,22 +40,31 @@ Fontosabb szempontok:
 
 ### 6. Igényelt üzleti folyamatok modellje
 
-6.1.   Termékek feltöltése a webshop felületére és adatbázisába
-6.2.   Termékek rendelésének kezelése (weboldalon keresztül, megerősítő emaileken keresztül)
-6.2.1. A felhasználó a kiválasztott terméket beteszi a kosarába, majd megrendeli
-6.2.2. A rendelés részletei láthatóak lesznek az admin felületen
-6.2.3. Rendelés összekészítése és csomagolása, megerősítő email elküldése
-6.2.4. Rendelés futárral való kézbesítése
-(6.3.  Adatbázis rendszer automatikus frissítése)
+6.1. Saját webshop ahol az összes termék megtalálható  
+6.2. Különböző szintű belépési lehetőség -> admin és user  
+6.3 Különböző menük a jogokhoz  
+  6.3.1. admin menü  
+    6.3.1.1. termékek feltöltése, módosítása, törlése  
+    6.3.1.2. kategóriák kezelése (hozzáadás, módosítás, törlés)  
+    6.3.1.3. kimutatások megtekintése   
+    6.3.1.4. rendelések kezelése  
+    6.3.1.5. userek kezelése (törlés, módosítás)  
+  6.3.2. user menü  
+    6.3.2.1. rendelések megtekintése  
+    6.3.2.2. satát profil megtekintése illetve módosítása (name, username, password)  
+    6.3.2.3. kategóriák szerinti termék szűrés  
+    6.3.2.4. kosár  
+6.4. Megrendelt, illetve kiszállított termékekre az ügyfelek értékelést tudnak leadni  
+6.5. Error page ha nem megfelelő oldalra téved az ügyfél
 
 
 ### 7. Követelménylista 
 
-"User" felhasználói felület:
+7.1. "User" felhasználói felület:
+     
 
 
-
-"Admin" felhasználói felület:
+7.2. "Admin" felhasználói felület:
 
 
 
