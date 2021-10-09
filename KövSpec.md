@@ -48,7 +48,15 @@ Szeretnénk ha az ügyfelek a vásárolt termékekről véleményt is írhatnán
 ### 5. A rendszerre vonatkozó szabályok
 
 A webes felület szabványos eszközökkel készüljön, HTML/CSS/JavaScript. A backend Java nyelven írodjon és MySQL adatbázishoz csatlakozzon. Responsive megjelenés nem kell.  
-A felhasználókat azonosító weboldalak esetében szükséges jogszabályokat be kell tartani: GDPR, ...
+**Webáruházakra vonatkozó jogszabályok:**
+- A Polgári Törvénykönyvről szóló 2013. évi V. törvény (Ptk.);
+- Az elektronikus kereskedelmi szolgáltatások, valamint az információs társadalommal összefüggő szolgáltatások egyes kérdéseiről szóló 2001. évi CVIII. törvény (Ektv.);
+- A fogyasztóvédelemről szóló 1997. évi CLV. törvény (Fgytv.);
+- A fogyasztó és a vállalkozás közötti szerződések részletes szabályairól szóló 45/2014. (II. 26.) Korm. rendelet;
+- A fogyasztókkal szembeni tisztességtelen kereskedelmi gyakorlat tilalmáról szóló 2008. évi XLVII. törvény (Fttv.)
+- Az egyes tartós fogyasztási cikkekre vonatkozó kötelező jótállásról szóló 151/2003. (IX. 22.) Korm. rendelet
+- A termékek eladási ára és egységára, továbbá a szolgáltatások díja feltüntetésének részletes szabályairól szóló 4/2009. (I. 30.) NFGM–SZMM együttes rendelet.
+- A fogyasztói jogviták online rendezéséről, valamint a 2006/2004/EK rendelet és a 2009/22/EK irányelv módosításáról szóló 524/2013/EU rendelet
 
 ### 6. Követelménylista
 
