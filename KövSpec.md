@@ -65,3 +65,4 @@ K07|V1.0|Bővíthetőség|A termékek, valamint a felhasználók számának bőv
 ### 7. Fogalomszótár
 
 - **Utánvétes csomagküldés**: Az utánvétes csomagküldés főleg a vevőnek hasznos, mert a csomag ellenértékét csak akkor kell kifizetnie, amikor ténylegesen átveszi a csomagot.
+- **Csillagos értékelés**: A vásárlók 1-től 5-ig értékelhetik a termékeket, ami az adott számú csillag kijelölésével történik. A többi látogató minden terméknél az összesített értékelést látja.
