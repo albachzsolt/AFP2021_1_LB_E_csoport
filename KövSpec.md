@@ -45,8 +45,19 @@ Szeretnénk ha az ügyfelek a vásárolt termékekről véleményt is írhatnak 
 4.4. Megrendelt, illetve kiszállított termékekre az ügyfelek értékelést tudnak leadni  
 4.5. Error page ha nem megfelelő oldalra téved az ügyfél
 
-
 ### 5. A rendszerre vonatkozó szabályok
 
 A web felület szabványos eszközökkel készüljön, html/css/javascript. Backend java nyelven írodjon és MySQL adatbázishoz csatlakozzon. Responsive megjelenés nem kell.  
 A felhasználókat azonosító web oldalak esetében szükséges jogszabályokat be kell tartani: GDPR, ...
+
+### 6. Követelménylista
+
+ID|Verzió|Név|Kifejtés
+--|------|---|--------
+K01|V1.0|Termékek adminisztrációja|Termékek regisztrálása, törlése az igényelt üzleti folyamatokban leírtak szerint.
+K02|V1.0|Vásárlás adminisztrációja|Vásárlások folyamatának kezelése az igényelt üzleti folyamatokban leírtak szerint.
+K03|V1.0|Felhasználói fiókok kezelése|Bejelentkezés, felhasználói adatok módosítása, adminok és felhasználók rögzítése az adatbázisban, listák és kimutatások készítése az igényelt üzleti folyamatokban leírtak szerint.
+K04|V1.0|Egyszerűen használható kezelőfelület|Az ismertebb böngészőkből használható felhasználói felület megvalósítása, amely mindenki számára a lehető legegyszerűbb átállást eredményezi.
+K05|V1.0|Platformfüggetlen működés|Régóta használatos, operációs rendszertől független technológiák használata: Java, HTML/CSS/JavaScript, MySQL.
+K06|V1.0|Költséghatékony üzemeltetés|A szabványos és elterjedt technológiák használata biztosítja.
+K07|V1.0|Bővíthetőség|A termékek, valamint a felhasználók számának bővíthetősége, illetve új funkciók utólagos hozzáadásának biztosítása.
