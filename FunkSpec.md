@@ -61,6 +61,8 @@ Fontosabb szempontok:
 
 ### 8. Használati esetek
 
+A felhasználó jogosult a termékek kosárba tételére, címének hozzáadására, rendelése állapotának megfigyelésére. Illetve értékelni tudja a megvásárolt terméket, a kézhezkapás után.
+Az admin jogosult a felhasználók kezelésére, törlésére. Rendelés állapotának módosítására. Termékek hozzáadására, eltávolítására. Vevői értékelések megtekintésre.
 
 ### 9. Megfeleltetés
 
