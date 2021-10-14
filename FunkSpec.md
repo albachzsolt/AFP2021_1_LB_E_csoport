@@ -69,10 +69,21 @@ Az admin jogosult a felhasználók kezelésére, törlésére. Rendelés állapo
 
 ### 10. Képernyő tervek
 
-Le kell írnunk mi az, ami látni szeretnénk a weblap oldalain, meg kell határozni a színeket, elemeket, képeket, animációkat etc. 
+Ki kell találnunk azt, amit látni szeretnénk a weblap oldalain, meg kell határozni a színeket, elemeket, képeket, animációkat etc. 
 Figyelni kell rá, hogy a tartalomhoz harmonikusan illeszkedjen a megjelenés, messzemenően ügyelve a funkcionalitásra, hiszen egy webshopról van szó, amelyben a használhatóság rendkívül jelentős tényező. 
 
 ### 11. Forgatókönyvek
+
+Mint ahogyan egy film esetében, a weblapnál is azt írja le a forgatókönyv, hogy mikor, mi történhet. 
+A szereplők itt a nyomógombok, a jelenetek a lapok. 
+
+Kezdőlap: A kezdő lapon található elemek közül a fejléc, a menüsor (menüpontok: kezdőlap, termékcsoportok, vásárlási feltételek, garancia, szállítás, kapcsolat), a weblap minden egyes oldalán megtalálhatóak lesznek. 
+A menüsorban a termékcsoportra kattintva lenyílik a menü és megjelennek a termékcsoportok nevei.
+Szállítás: egyszerű, statikus szöveg az állandó elemek mellett.
+Termékek: Minden termékről látható legalább egy kép. Amennyiben több kép is található a rendszerben az adott termékről, akkor egy kis nyíl jelenik meg a kép mellett, amellyel léptetni lehet őket. 
+Kosár (rendelés leadása): a kosárban lévő termékek miniatűr képpel és felirattal jelennek meg, mellettük egy szám, amely a rendelés mennyisége. Ezt a számot szabadon átírhatjuk. 
+A megrendelés lépéseinél végig egyszerű űrlapok és szövegek jelenek meg.
+Regisztráció: egy egyszerű űrlap áll a rendelkezésre. 
 
 
 ### 12. Funkció-követelmény megfeleltetés
