@@ -69,6 +69,8 @@ Az admin jogosult a felhasználók kezelésére, törlésére. Rendelés állapo
 
 ### 10. Képernyő tervek
 
+Le kell írnunk mi az, ami látni szeretnénk a weblap oldalain, meg kell határozni a színeket, elemeket, képeket, animációkat etc. 
+Figyelni kell rá, hogy a tartalomhoz harmonikusan illeszkedjen a megjelenés, messzemenően ügyelve a funkcionalitásra, hiszen egy webshopról van szó, amelyben a használhatóság rendkívül jelentős tényező. 
 
 ### 11. Forgatókönyvek
 
