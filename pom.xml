@@ -12,7 +12,7 @@
 	<artifactId>webshop</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>webshop</name>
-	<description>Exam project of ToDos</description>
+	<description>Greenhub Webshop</description>
 
 	<properties>
 		<java.version>11</java.version>
