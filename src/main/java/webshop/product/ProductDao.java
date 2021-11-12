@@ -93,6 +93,10 @@ public class ProductDao {
         return isNameUnique(name) || !isNameUnique(name) && (ids.get(0) == id);
     }
 
+    public void logicalDeleteProductById(long id) {
+        jdbcTemplate.update("update products set status = ? where id = ?", "DELETED", id);
+    }
+
     public boolean isAlreadyDeleted(long id){
         List<String> status = jdbcTemplate.query("select status from products where id = ?", new RowMapper<String>() {
             @Override
