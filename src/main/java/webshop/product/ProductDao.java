@@ -63,4 +63,14 @@ public class ProductDao {
         return products.isEmpty();
     }
 
+    public boolean isNameUnique(String name) {
+        List<String> products = jdbcTemplate.query("select name from products where name = ?", new RowMapper<String>() {
+            @Override
+            public String mapRow(ResultSet resultSet, int i) throws SQLException {
+                return resultSet.getString("name");
+            }
+        }, name);
+        return products.isEmpty();
+    }
+
 }
