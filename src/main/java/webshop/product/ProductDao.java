@@ -53,4 +53,14 @@ public class ProductDao {
         },address);
     }
 
+    public boolean isCodeUnique(String code) {
+        List<String> products = jdbcTemplate.query("select code from products where code = ?", new RowMapper<String>() {
+            @Override
+            public String mapRow(ResultSet resultSet, int i) throws SQLException {
+                return resultSet.getString("code");
+            }
+        }, code);
+        return products.isEmpty();
+    }
+
 }
