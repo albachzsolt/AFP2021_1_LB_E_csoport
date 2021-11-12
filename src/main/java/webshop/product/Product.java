@@ -60,4 +60,32 @@ public class Product {
         }
         return stringBuilder.append(string.charAt(string.length()-1)).toString();
     }
+
+    public ProductStatus getProductStatus() {
+        return productStatus;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public long getId() {
+        return id;
+    }
 }
