@@ -88,4 +88,12 @@ public class Product {
     public long getId() {
         return id;
     }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
