@@ -93,4 +93,13 @@ public class ProductDao {
         return isNameUnique(name) || !isNameUnique(name) && (ids.get(0) == id);
     }
 
+    public boolean isAlreadyDeleted(long id){
+        List<String> status = jdbcTemplate.query("select status from products where id = ?", new RowMapper<String>() {
+            @Override
+            public String mapRow(ResultSet resultSet, int i) throws SQLException {
+                return resultSet.getString(STATUS);
+            }
+        }, id);
+        return status.get(0).equals("DELETED");
+    }
 }
