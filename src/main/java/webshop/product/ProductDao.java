@@ -83,4 +83,14 @@ public class ProductDao {
         return isCodeUnique(code) || !isCodeUnique(code) && (ids.get(0) == id);
     }
 
+    public boolean isIdTheSameForUpdatingTheSameName(String name, long id) {
+        List<Long> ids = jdbcTemplate.query("select id from products where name = ?", new RowMapper<Long>() {
+            @Override
+            public Long mapRow(ResultSet resultSet, int i) throws SQLException {
+                return resultSet.getLong("id");
+            }
+        }, name);
+        return isNameUnique(name) || !isNameUnique(name) && (ids.get(0) == id);
+    }
+
 }
