@@ -2,12 +2,14 @@ package webshop.product;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ProductDao {
@@ -105,5 +107,27 @@ public class ProductDao {
             }
         }, id);
         return status.get(0).equals("DELETED");
+    }
+
+    public void deleteAll() {
+        jdbcTemplate.update("delete from products");
+    }
+
+
+    public long getProductIdByProductCode(String productCode) {
+        Long productId =
+                new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).queryForObject(
+                        "SELECT id FROM products WHERE code = " +
+                                "(:code)", Map.of("code",
+                                productCode),
+                        (rs, i) -> rs.getLong("id"));
+        if (productId == null) {
+            throw new IllegalStateException("Product id does not exist for product code: " + productCode);
+        }
+        return productId;
+    }
+
+    public int countActiveProducts() {
+        return jdbcTemplate.queryForObject("Select count(id) from products where status = 'ACTIVE'", (rs, i) -> rs.getInt("count(id)"));
     }
 }
