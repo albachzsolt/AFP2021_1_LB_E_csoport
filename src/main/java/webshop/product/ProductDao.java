@@ -2,12 +2,14 @@ package webshop.product;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository
 public class ProductDao {
 
     private JdbcTemplate jdbcTemplate;
@@ -37,5 +39,18 @@ public class ProductDao {
         });
     }
 
+    public Object findProductByAddressTwo(String address) {
+        return jdbcTemplate.queryForObject("select id,code,name,manufacturer,price, status from products where address = ?", new RowMapper<Product>() {
+            @Override
+            public Product mapRow(ResultSet resultSet, int i) throws SQLException {
+                return new Product(resultSet.getLong("id"),
+                        resultSet.getString("code"),
+                        resultSet.getString("name"),
+                        resultSet.getString(MANUFACTURER),
+                        resultSet.getInt(PRICE),
+                        ProductStatus.valueOf(resultSet.getString(STATUS)));
+            }
+        },address);
+    }
 
 }
