@@ -1,5 +1,7 @@
 package webshop.user;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class User {
 
     private long id;
@@ -9,6 +11,8 @@ public class User {
     private String password;
     private int enabled;
     private UserRole userRole;
+
+
 
     public long getId() {
         return id;
@@ -52,5 +56,27 @@ public class User {
 
     public void setEnabled(int enabled) {
         this.enabled = enabled;
+    }
+
+    private UserRole roleMaker(UserRole role) {
+        if (role == null) {
+            return UserRole.ROLE_USER;
+        }
+        return role;
+    }
+
+    private String passwordMaker(String passwordString) {
+        if (!isPasswordValid(passwordString)) {
+            return null;
+        }
+        return new BCryptPasswordEncoder(4).encode(passwordString);
+    }
+
+    private boolean isPasswordValid(String pass) {
+        return !isEmpty(pass) && pass.matches("^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$");
+    }
+
+    private boolean isEmpty(String string) {
+        return string == null || string.trim().isEmpty();
     }
 }
