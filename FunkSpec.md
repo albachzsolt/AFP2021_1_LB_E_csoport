@@ -13,9 +13,22 @@ Ebből adódóan a múltban történtek már a rendelésekkel kapcsolatos félre
 
 ### 3. Vágyálom rendszer leírása
 
-Részletesen a követelmény specifikációban olvasható.
+Hivatkozás a követelmény specifikáció 2. pontjára:
 
-Fontosabb szempontok:
+Vállalkozásunk bővítése érdekében szeretnénk üzletünknek honlapot és egyúttal az adminisztrációnkat támogató rendszert.
+Szeretnénk, hogy ügyfeleink minden termékünket könnyedén megtalálhassák egy igényes és szép weboldalon.
+Szeretnénk nyilvántartásunkat online kezelni, hogy az ügyvezetők bárhonnan rá tudjanak nézni az aktuális információkra.
+
+A weboldal könnyen üzemeltethető legyen, különböző szintű belépési rendszerrel (admin, user). Termékeket fel lehessen tölteni, módosítani, különböző kategóriákba besorolni.
+A kategóriákat ugyanúgy lehessen bővíteni, szerkeszteni, törölni.
+Kimutatásokat szeretnénk elérni az oldalon keresztül, illetve egy áttekinthető oldalt,ahol azonnal látjuk hány regisztrált ügyfelünk van, hány megrendelés és azok milyen státuszban vannak,
+valamint hány termék van aktív, illetve törölt állapotban. 
+
+Szeretnénk ha az ügyfelek a vásárolt termékekről véleményt is írhatnának(szöveges illetve csillagos értékelést egyaránt), de csak a megrendelt temékek kiszállítása után.
+Természetesen az ügyfelek regisztrációt követően vissza tudják nézni a korábbi rendelésüket, valamint azok állapotát.
+
+
+A fentiek alapján a fontosabb szempontok a következők:
 - Weboldal és egyben webshop létrehozása
 - Nyilvántartások online vezetése
 - Külön szintű belépési rendszer létrehozása (admin, user)
@@ -46,14 +59,30 @@ Fontosabb szempontok:
 5.2.4. Rendelés futárral való kézbesítése
 (5.3.  Adatbázis rendszer automatikus frissítése)
 
+6.1. Saját webshop ahol az összes termék megtalálható  
+6.2. Különböző szintű belépési lehetőség -> admin és user  
+6.3 Különböző menük a jogokhoz  
+  6.3.1. admin menü  
+    6.3.1.1. termékek feltöltése, módosítása, törlése  
+    6.3.1.2. kategóriák kezelése (hozzáadás, módosítás, törlés)  
+    6.3.1.3. kimutatások megtekintése   
+    6.3.1.4. rendelések kezelése  
+    6.3.1.5. userek kezelése (törlés, módosítás)  
+  6.3.2. user menü  
+    6.3.2.1. rendelések megtekintése  
+    6.3.2.2. satát profil megtekintése illetve módosítása (name, username, password)  
+    6.3.2.3. kategóriák szerinti termék szűrés  
+    6.3.2.4. kosár  
+6.4. Megrendelt, illetve kiszállított termékekre az ügyfelek értékelést tudnak leadni  
+6.5. Error page ha nem megfelelő oldalra téved az ügyfél
 
 ### 6. Követelménylista 
 
-"User" felhasználói felület:
+6.1. "User" felhasználói felület:
 
 
+6.2. "Admin" felhasználói felület:
 
-"Admin" felhasználói felület:
 
 
 
