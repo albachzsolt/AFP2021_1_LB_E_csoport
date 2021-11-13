@@ -16,4 +16,24 @@ public class Stat {
         this.numOfActiveOrders = numOfActiveOrders;
         this.numOfOrders = numOfOrders;
     }
+
+    public int getNumOfUsers() {
+        return numOfUsers;
+    }
+
+    public int getNumOfActiveProducts() {
+        return numOfActiveProducts;
+    }
+
+    public int getNumOfProducts() {
+        return numOfProducts;
+    }
+
+    public int getNumOfActiveOrders() {
+        return numOfActiveOrders;
+    }
+
+    public int getNumOfOrders() {
+        return numOfOrders;
+    }
 }
