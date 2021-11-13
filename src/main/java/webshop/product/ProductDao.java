@@ -52,7 +52,7 @@ public class ProductDao {
                         resultSet.getInt(PRICE),
                         ProductStatus.valueOf(resultSet.getString(STATUS)));
             }
-        },address);
+        }, address);
     }
 
     public boolean isCodeUnique(String code) {
@@ -99,7 +99,7 @@ public class ProductDao {
         jdbcTemplate.update("update products set status = ? where id = ?", "DELETED", id);
     }
 
-    public boolean isAlreadyDeleted(long id){
+    public boolean isAlreadyDeleted(long id) {
         List<String> status = jdbcTemplate.query("select status from products where id = ?", new RowMapper<String>() {
             @Override
             public String mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -129,6 +129,10 @@ public class ProductDao {
 
     public int countActiveProducts() {
         return jdbcTemplate.queryForObject("Select count(id) from products where status = 'ACTIVE'", (rs, i) -> rs.getInt("count(id)"));
+    }
+
+    public Product getProductByProductId(long productId) {
+        return jdbcTemplate.queryForObject("select id, code, name, manufacturer, price,status from products where id=?", (rs, i) -> new Product(rs.getLong(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),ProductStatus.valueOf(rs.getString(6))),productId);
     }
 
     public List<Product> lastThreeProducts() {
