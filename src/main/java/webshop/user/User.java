@@ -37,4 +37,20 @@ public class User {
     public UserRole getUserRole() {
         return userRole;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
 }
