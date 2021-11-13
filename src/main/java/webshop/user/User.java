@@ -12,7 +12,16 @@ public class User {
     private int enabled;
     private UserRole userRole;
 
-
+    public User(long id, String firstName, String lastName, String username,String password, int enabled,
+                UserRole userRole) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = passwordMaker(password);
+        this.enabled = enabled;
+        this.userRole = roleMaker(userRole);
+    }
 
     public long getId() {
         return id;
