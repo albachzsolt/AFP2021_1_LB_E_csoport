@@ -76,6 +76,25 @@ public class ProductDao {
         return products.isEmpty();
     }
 
+    public int updateProduct(long id, Category category, long categoryId) {
+        return jdbcTemplate.update("update products set code = ?, name = ?, address = ?,manufacturer = ?, price = ?, status = ?" +
+                        ", category_id = ? where id = ?",
+                category.getProducts().get(0).getCode(), category.getProducts().get(0).getName(), category.getProducts().get(0).getAddress(), category.getProducts().get(0).getManufacturer(),
+                category.getProducts().get(0).getPrice(),
+                category.getProducts().get(0).getProductStatus().name(), categoryId, id);
+
+    }
+
+    public boolean isAddressEdited(String address, long id) {
+        List<String> addressFromDB = jdbcTemplate.query("select address from products where id =?", new RowMapper<String>() {
+            @Override
+            public String mapRow(ResultSet resultSet, int i) throws SQLException {
+                return resultSet.getString(ADDRESS);
+            }
+        }, id);
+        return !address.equals(addressFromDB.get(0));
+    }
+
     public boolean isIdTheSameForUpdatingTheSameCode(String code, long id) {
         List<Long> ids = jdbcTemplate.query("select id from products where code = ?", new RowMapper<Long>() {
             @Override
