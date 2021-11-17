@@ -4,6 +4,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import webshop.category.Category;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -129,6 +130,28 @@ public class ProductDao {
 
     public int countActiveProducts() {
         return jdbcTemplate.queryForObject("Select count(id) from products where status = 'ACTIVE'", (rs, i) -> rs.getInt("count(id)"));
+    }
+
+    //query returns only one product in the list so here it is okay to use this
+    public Category findProductByAddressWithCategory(String address) {
+        return jdbcTemplate.queryForObject("select categories.id, categories.name, sequence, products.id, code, products.name," +
+                        "manufacturer,price, status from products join categories on categories.id = category_id where address = ?",
+                new RowMapper<Category>() {
+                    @Override
+                    public Category mapRow(ResultSet resultSet, int i) throws SQLException {
+                        return new Category(
+                                resultSet.getLong("categories.id"),
+                                resultSet.getString("categories.name"),
+                                resultSet.getInt("sequence"),
+                                List.of(new Product(resultSet.getLong("products.id"),
+                                        resultSet.getString("code"),
+                                        resultSet.getString("products.name"),
+                                        resultSet.getString(MANUFACTURER),
+                                        resultSet.getInt(PRICE),
+                                        ProductStatus.valueOf(resultSet.getString(STATUS))))
+                        );
+                    }
+                }, address);
     }
 
     public Product getProductByProductId(long productId) {
