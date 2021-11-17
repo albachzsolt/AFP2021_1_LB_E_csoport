@@ -132,6 +132,10 @@ public class ProductDao {
         return jdbcTemplate.queryForObject("Select count(id) from products where status = 'ACTIVE'", (rs, i) -> rs.getInt("count(id)"));
     }
 
+    public int countAllProducts() {
+        return jdbcTemplate.queryForObject("Select count(id) from products", (rs, i) -> rs.getInt("count(id)"));
+    }
+
     public List<Product> listAllProductsByCategory(Category category) {
         return jdbcTemplate.query("select products.id, code, products.name, address, manufacturer, price, " +
                 "status, categories.name from products join categories on products.category_id = categories" +
