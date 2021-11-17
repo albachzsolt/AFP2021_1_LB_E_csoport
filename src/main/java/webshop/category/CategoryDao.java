@@ -73,4 +73,24 @@ public class CategoryDao {
             }
         });
     }
+
+    public boolean doesSequenceAlreadyExist(Category category){
+        List<Integer> sequence = jdbcTemplate.query("select sequence from categories where sequence = ?",
+                new RowMapper<Integer>() {
+                    @Override
+                    public Integer mapRow(ResultSet resultSet, int i) throws SQLException {
+                        return resultSet.getInt(SEQUENCE);
+                    }
+                }, category.getSequence());
+        return !sequence.isEmpty();
+    }
+
+    public int getSequenceById(long categoryId){
+        return jdbcTemplate.queryForObject("select sequence from categories where id = ?", new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet resultSet, int i) throws SQLException {
+                return resultSet.getInt(SEQUENCE);
+            }
+        }, categoryId);
+    }
 }
