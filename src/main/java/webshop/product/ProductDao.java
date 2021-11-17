@@ -1,14 +1,16 @@
 package webshop.product;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import webshop.category.Category;
 
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
@@ -54,6 +56,30 @@ public class ProductDao {
                         ProductStatus.valueOf(resultSet.getString(STATUS)));
             }
         }, address);
+    }
+
+    public long addNewProductAndGetId(Category category, long categoryId) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(new PreparedStatementCreator() {
+                                @Override
+                                public PreparedStatement createPreparedStatement(Connection connection)
+                                        throws SQLException {
+                                    PreparedStatement ps =
+                                            connection.prepareStatement("insert into products (code, name, address, " +
+                                                            "manufacturer, price, category_id) values (?, ?, ?, ?, ?, ?)",
+                                                    Statement.RETURN_GENERATED_KEYS);
+                                    ps.setString(1, category.getProducts().get(0).getCode());
+                                    ps.setString(2, category.getProducts().get(0).getName());
+                                    ps.setString(3, category.getProducts().get(0).getAddress());
+                                    ps.setString(4, category.getProducts().get(0).getManufacturer());
+                                    ps.setInt(5, category.getProducts().get(0).getPrice());
+                                    ps.setLong(6, categoryId);
+                                    return ps;
+                                }
+                            }, keyHolder
+        );
+        return keyHolder.getKey().longValue();
     }
 
     public boolean isCodeUnique(String code) {
