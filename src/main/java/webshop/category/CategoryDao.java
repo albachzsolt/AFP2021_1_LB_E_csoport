@@ -64,4 +64,13 @@ public class CategoryDao {
         );
         return keyHolder.getKey().longValue();
     }
+
+    public int getNumberOfCategories(){
+        return jdbcTemplate.queryForObject("select COUNT(id) from categories", new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet resultSet, int i) throws SQLException {
+                return resultSet.getInt("COUNT(id)");
+            }
+        });
+    }
 }
