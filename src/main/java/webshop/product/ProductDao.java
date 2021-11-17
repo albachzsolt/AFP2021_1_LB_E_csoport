@@ -132,7 +132,11 @@ public class ProductDao {
     }
 
     public Product getProductByProductId(long productId) {
-        return jdbcTemplate.queryForObject("select id, code, name, manufacturer, price,status from products where id=?", (rs, i) -> new Product(rs.getLong(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),ProductStatus.valueOf(rs.getString(6))),productId);
+        return jdbcTemplate.queryForObject("select id, code, name, manufacturer, price,status from products where id=?", (rs, i) -> new Product(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), ProductStatus.valueOf(rs.getString(6))), productId);
+    }
+
+    public int updateProductCategoryIfCategoryIsDeleted(long deletedCategoryId) {
+        return jdbcTemplate.update("update products set category_id = 1 where category_id = ?", deletedCategoryId);
     }
 
     public List<Product> lastThreeProducts() {
