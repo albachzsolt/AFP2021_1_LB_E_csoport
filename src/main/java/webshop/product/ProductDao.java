@@ -132,6 +132,25 @@ public class ProductDao {
         return jdbcTemplate.queryForObject("Select count(id) from products where status = 'ACTIVE'", (rs, i) -> rs.getInt("count(id)"));
     }
 
+    public List<Product> listAllProductsByCategory(Category category) {
+        return jdbcTemplate.query("select products.id, code, products.name, address, manufacturer, price, " +
+                "status, categories.name from products join categories on products.category_id = categories" +
+                ".id where categories.id = ? order by products.name", new RowMapper<Product>() {
+            @Override
+            public Product mapRow(ResultSet resultSet, int i) throws SQLException {
+                return new Product(
+                        resultSet.getLong("products.id"),
+                        resultSet.getString("code"),
+                        resultSet.getString("products.name"),
+                        resultSet.getString(ADDRESS),
+                        resultSet.getString(MANUFACTURER),
+                        resultSet.getInt(PRICE),
+                        ProductStatus.valueOf(resultSet.getString(STATUS))
+                );
+            }
+        }, category.getId());
+    }
+
     //query returns only one product in the list so here it is okay to use this
     public Category findProductByAddressWithCategory(String address) {
         return jdbcTemplate.queryForObject("select categories.id, categories.name, sequence, products.id, code, products.name," +
