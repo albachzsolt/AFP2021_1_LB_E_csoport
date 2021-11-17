@@ -1,6 +1,7 @@
 package webshop.product;
 
 import org.springframework.stereotype.Service;
+import webshop.category.Category;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,19 +15,23 @@ public class ProductService {
         this.productDao = productDao;
     }
 
-    public List<Product> listAllProducts(){
+    public List<Product> listAllProducts() {
         return productDao.listAllProducts();
     }
 
-    public Object findProductByAddressTwo(String address){
+    public Category findProductByAddress(String address) {
+        return productDao.findProductByAddressWithCategory(address);
+    }
+
+    public Object findProductByAddressTwo(String address) {
         return productDao.findProductByAddressTwo(address);
     }
 
-    public List<Product> lastThreeProducts(){
+    public List<Product> lastThreeProducts() {
         return productDao.lastThreeProducts();
     }
 
-    public Product getProductByProductId(long productId){
+    public Product getProductByProductId(long productId) {
         return productDao.getProductByProductId(productId);
     }
 }
