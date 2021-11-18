@@ -110,4 +110,13 @@ public class CategoryDao {
     public void deleteCategoryById(long categoryId){
         jdbcTemplate.update("delete from categories where id = ?", categoryId);
     }
+
+    public long getCategoryIdByCategoryName (String categoryName){
+        return jdbcTemplate.queryForObject("select id from categories where name = ?", new RowMapper<Long>() {
+            @Override
+            public Long mapRow(ResultSet resultSet, int i) throws SQLException {
+                return resultSet.getLong("id");
+            }
+        }, categoryName);
+    }
 }
