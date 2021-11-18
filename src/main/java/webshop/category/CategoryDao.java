@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import webshop.product.Product;
+import webshop.product.ProductStatus;
 
 import java.sql.*;
 import java.util.List;
@@ -116,6 +118,25 @@ public class CategoryDao {
             @Override
             public Long mapRow(ResultSet resultSet, int i) throws SQLException {
                 return resultSet.getLong("id");
+            }
+        }, categoryName);
+    }
+
+    public List<Product> listAllProductsByCategoryName(String categoryName){
+        return jdbcTemplate.query("select products.id, code, products.name, address, manufacturer, price, " +
+                "status from products join categories on products.category_id = categories" +
+                ".id where categories.name = ?", new RowMapper<Product>() {
+            @Override
+            public Product mapRow(ResultSet resultSet, int i) throws SQLException {
+                return new Product(
+                        resultSet.getLong("products.id"),
+                        resultSet.getString("code"),
+                        resultSet.getString("products.name"),
+                        resultSet.getString("address"),
+                        resultSet.getString("manufacturer"),
+                        resultSet.getInt("price"),
+                        ProductStatus.valueOf(resultSet.getString("status"))
+                );
             }
         }, categoryName);
     }
