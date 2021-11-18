@@ -93,4 +93,12 @@ public class CategoryDao {
             }
         }, categoryId);
     }
+
+    public void updateSequence(int newSequence, long id){
+        jdbcTemplate.update("update categories set sequence = ? where id = ?", newSequence, id);
+    }
+
+    public void updateSequenceTwo(int newSequence, Category category){
+        jdbcTemplate.update("update categories set sequence = ? where id = ?", newSequence, category.getId());
+    }
 }
