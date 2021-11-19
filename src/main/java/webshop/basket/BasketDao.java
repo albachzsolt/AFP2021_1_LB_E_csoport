@@ -87,4 +87,17 @@ public class BasketDao {
                 BASKET_ITEM_ROW_MAPPER);
 
     }
+
+    public int sumProductPiecesInBasketByBasketId(long basketId) {
+        Integer sumProductPieces =
+                new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).queryForObject(
+                        "SELECT sum(quantity) as sum_pieces FROM basket_items where basket_id = " +
+                                "(:basket_id)", Map.of(BASKET_ID,
+                                basketId),
+                        (rs, i) -> rs.getInt("sum_pieces"));
+        if (sumProductPieces != null) {
+            return sumProductPieces;
+        }
+        return 0;
+    }
 }
