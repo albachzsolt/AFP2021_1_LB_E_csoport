@@ -134,4 +134,22 @@ public class BasketDao {
                         "AND product_id = (:product_id)",
                 Map.of("basket_id", basketId, PRODUCT_ID, productId, QUANTITY, quantity));
     }
+
+    public int clearBasketByBasketId(long basketId) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).update("DELETE FROM basket_items WHERE basket_id = " +
+                "(:basket_id);", Map.of("basket_id", basketId));
+    }
+
+    public void deleteAll() {
+        jdbcTemplate.update("delete from baskets");
+    }
+
+    public void deleteAllBusketItems() {
+        jdbcTemplate.update("delete from basket_items");
+    }
+
+    public int deleteOneProductFromBusket(long basketId, long productid) {
+        return jdbcTemplate.update("DELETE FROM basket_items WHERE basket_id = ? and " +
+                "product_id=?;", basketId, productid);
+    }
 }
