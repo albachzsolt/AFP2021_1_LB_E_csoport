@@ -2,6 +2,7 @@ package webshop.basket;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
@@ -11,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Map;
 
 public class BasketDao {
 
@@ -48,5 +50,16 @@ public class BasketDao {
         );
 
         return keyHolder.getKey().longValue();
+    }
+
+    public long getBasketIdByUserId(long userId) {
+        Long basketId =
+                new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).queryForObject(
+                        "SELECT id FROM baskets WHERE user_id = (:user_id)", Map.of("user_id", userId),
+                        (rs, i) -> rs.getLong("id"));
+        if (basketId != null) {
+            return basketId;
+        }
+        return 0;
     }
 }
