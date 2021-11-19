@@ -1,5 +1,6 @@
 package webshop.basket;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -111,5 +112,26 @@ public class BasketDao {
             return sumProductPrice;
         }
         return 0;
+    }
+
+    public int addProductToBasket(long basketId, long productId, int quantity) {
+        Integer productQuantityInBasketAlready = 0;
+        try {
+            productQuantityInBasketAlready = new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).queryForObject(
+                    "SELECT quantity FROM basket_items where " +
+                            "basket_id = (:basket_id) AND product_id = (:product_id)", Map.of(
+                            BASKET_ID, basketId, PRODUCT_ID, productId),
+                    (rs, i) -> rs.getInt(QUANTITY));
+        } catch (EmptyResultDataAccessException erdae) {
+            return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).update(
+                    "INSERT INTO basket_items (product_id, basket_id, quantity) values (:product_id, " +
+                            ":basket_id, :quantity)",
+                    Map.of(PRODUCT_ID, productId, BASKET_ID, basketId, QUANTITY, quantity));
+        }
+        quantity += productQuantityInBasketAlready;
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).update(
+                "UPDATE basket_items SET quantity = (:quantity) where basket_id = (:basket_id) " +
+                        "AND product_id = (:product_id)",
+                Map.of("basket_id", basketId, PRODUCT_ID, productId, QUANTITY, quantity));
     }
 }
