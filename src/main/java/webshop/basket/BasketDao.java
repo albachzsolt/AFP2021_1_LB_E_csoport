@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 import webshop.product.Product;
 import webshop.product.ProductStatus;
 
@@ -18,6 +19,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class BasketDao {
 
     private JdbcTemplate jdbcTemplate;
@@ -151,5 +153,12 @@ public class BasketDao {
     public int deleteOneProductFromBusket(long basketId, long productid) {
         return jdbcTemplate.update("DELETE FROM basket_items WHERE basket_id = ? and " +
                 "product_id=?;", basketId, productid);
+    }
+
+    public int updateProductQuantityInBasket(long basketId, long productId, int quantity) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).update(
+                "UPDATE basket_items SET quantity = (:quantity) where basket_id = (:basket_id) " +
+                        "AND product_id = (:product_id)",
+                Map.of("basket_id", basketId, PRODUCT_ID, productId, QUANTITY, quantity));
     }
 }
