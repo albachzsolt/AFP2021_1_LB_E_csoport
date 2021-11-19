@@ -100,4 +100,16 @@ public class BasketDao {
         }
         return 0;
     }
+
+    public int sumProductPriceInBasketByBasketId(long basketId) {
+        Integer sumProductPrice =
+                new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).queryForObject(
+                        "SELECT SUM(products.price * basket_items.quantity) as sum_price FROM basket_items JOIN products ON basket_items.product_id = products.id where basket_id = (:basket_id)", Map.of(BASKET_ID,
+                                basketId),
+                        (rs, i) -> rs.getInt("sum_price"));
+        if (sumProductPrice != null) {
+            return sumProductPrice;
+        }
+        return 0;
+    }
 }
