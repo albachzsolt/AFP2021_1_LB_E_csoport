@@ -8,6 +8,15 @@ public class StatByProduct {
     private int prodcutCounter;
     private int amount;
 
+    public StatByProduct(int year, int month, String productName, int productPrice, int prodcutCounter, int amount) {
+        this.year = year;
+        this.month = month;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.prodcutCounter = prodcutCounter;
+        this.amount = amount;
+    }
+
 
     public int getYear() {
         return year;
