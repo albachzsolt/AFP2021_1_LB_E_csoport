@@ -71,4 +71,24 @@ public class CategoryService {
             return new CustomResponseStatus(Response.FAILED, "This category is already deleted.");
         }
     }
+
+    public CustomResponseStatus updateCategoryById(Category category){
+        if ((categoryDao.getNumberOfCategories() + 1) < category.getSequence()) {
+            return new CustomResponseStatus(Response.FAILED,"Sequence can not be bigger then the number of categories.");
+        }
+        if (category.getSequence() == 0){
+            category.setSequence(categoryDao.getNumberOfCategories() + 1);
+        }
+        categoryDao.updateCategoryById(category);
+        if (categoryDao.doesSequenceAlreadyExist(category)){
+            List<Category> categories = categoryDao.listAllCategories();
+            for (int i = 0; i < categories.size(); i++){
+                if (i + 1 == category.getSequence() && categories.get(i).getId() == category.getId()) {
+                    continue;
+                }
+                categoryDao.updateSequenceTwo(i + 1, categories.get(i));
+            }
+        }
+        return new CustomResponseStatus(Response.SUCCESS, String.format("Category updated successfully with ID %d", category.getId()));
+    }
 }
