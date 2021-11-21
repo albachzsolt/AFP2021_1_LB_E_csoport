@@ -65,4 +65,9 @@ public class ProductController {
             return productService.updateProduct(productId, category);
         }
     }
+
+    @DeleteMapping("/api/product/{productId}")
+    public CustomResponseStatus logicalDeleteProductById(@PathVariable long productId){
+        return productService.logicalDeleteProductById(productId);
+    }
 }
