@@ -2,7 +2,7 @@ package webshop;
 
 public enum Response {
 
-    SUCCES("Succes"),
+    SUCCESS("Succes"),
     FAILED("Failed");
 
     private String description;
