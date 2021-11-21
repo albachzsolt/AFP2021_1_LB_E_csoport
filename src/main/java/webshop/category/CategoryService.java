@@ -16,12 +16,17 @@ public class CategoryService {
         this.productDao = productDao;
     }
 
-    public List<Category> listAllProducts(){
+    public List<Category> listAllProducts() {
         List<Category> categoryList = categoryDao.listAllCategories();
 
-        for (Category category : categoryList){
+        for (Category category : categoryList) {
             category.setProducts(productDao.listAllProductsByCategory(category));
         }
         return categoryList;
     }
+
+    public List<Category> listAllCategories() {
+        return categoryDao.listAllCategories();
+    }
+
 }
