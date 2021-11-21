@@ -6,6 +6,8 @@ import webshop.CustomResponseStatus;
 import webshop.Response;
 import webshop.category.Category;
 
+import java.util.List;
+
 @RestController
 public class ProductController {
 
@@ -67,7 +69,12 @@ public class ProductController {
     }
 
     @DeleteMapping("/api/product/{productId}")
-    public CustomResponseStatus logicalDeleteProductById(@PathVariable long productId){
+    public CustomResponseStatus logicalDeleteProductById(@PathVariable long productId) {
         return productService.logicalDeleteProductById(productId);
+    }
+
+    @GetMapping("/api/product/recommend")
+    public List<Product> lastThreeProducts() {
+        return productService.lastThreeProducts();
     }
 }
