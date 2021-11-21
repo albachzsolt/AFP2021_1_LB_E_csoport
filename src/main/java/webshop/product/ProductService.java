@@ -63,6 +63,14 @@ public class ProductService {
         return productDao.findProductByAddressTwo(address);
     }
 
+    public CustomResponseStatus logicalDeleteProductById(long id) {
+        if (productDao.isAlreadyDeleted(id)) {
+            return new CustomResponseStatus(Response.FAILED, "This product is already deleted.");
+        }
+        productDao.logicalDeleteProductById(id);
+        return new CustomResponseStatus(Response.SUCCESS, "Deleted!");
+    }
+
     public List<Product> lastThreeProducts() {
         return productDao.lastThreeProducts();
     }
