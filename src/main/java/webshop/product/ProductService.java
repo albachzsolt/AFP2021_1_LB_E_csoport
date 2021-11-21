@@ -6,7 +6,6 @@ import webshop.Response;
 import webshop.category.Category;
 import webshop.category.CategoryDao;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Service
