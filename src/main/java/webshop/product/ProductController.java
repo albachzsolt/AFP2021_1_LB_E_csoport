@@ -1,9 +1,7 @@
 package webshop.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import webshop.CustomResponseStatus;
 import webshop.Response;
 import webshop.category.Category;
@@ -35,5 +33,21 @@ public class ProductController {
     //  @GetMapping("/api/product/{address}")
     public Category findProductByAddress(@PathVariable String address) {
         return productService.findProductByAddress(address);
+    }
+
+    @PostMapping("/api/products")
+    public CustomResponseStatus addNewProduct(@RequestBody Category category) {
+        productValidator.isAddressNull(category.getProducts().get(0));
+        try {
+            CustomResponseStatus responseStatus = productValidator.validateProduct(category.getProducts().get(0));
+            if (responseStatus.getResponse().equals(Response.SUCCESS)) {
+                long id = productService.addNewProductAndGetId(category);
+                return new CustomResponseStatus(Response.SUCCESS, String.format("Successfully created with %d id", id));
+            } else {
+                return responseStatus;
+            }
+        } catch (IllegalArgumentException iae) {
+            return new CustomResponseStatus(Response.FAILED, iae.getMessage());
+        }
     }
 }
