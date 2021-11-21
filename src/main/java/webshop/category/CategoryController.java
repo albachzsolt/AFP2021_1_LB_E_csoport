@@ -40,4 +40,9 @@ public class CategoryController {
         }
         return categoryService.updateCategoryById(category);
     }
+
+    @DeleteMapping("/api/category/{categoryId}")
+    public CustomResponseStatus deleteCategoryAndUpdateProductCategoryToNoCategory(@PathVariable long categoryId){
+        return categoryService.deleteCategoryAndUpdateProductCategoryId(categoryId);
+    }
 }
