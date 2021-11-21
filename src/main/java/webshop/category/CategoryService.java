@@ -51,4 +51,24 @@ public class CategoryService {
         long id = categoryDao.addNewCategoryAndGetId(category);
         return new CustomResponseStatus(Response.SUCCESS, String.format("Category added successfully with ID %d", id));
     }
+
+    public CustomResponseStatus deleteCategoryAndUpdateProductCategoryId(long categoryId){
+        productDao.updateProductCategoryIfCategoryIsDeleted(categoryId);
+
+        boolean found = false;
+        for (Category category : categoryDao.listAllCategories()){
+            if (category.getId() == categoryId){
+                found = true;
+            }
+        }
+        if (found){
+            categoryDao.deleteCategoryById(categoryId);
+            for (int i = 0; i < categoryDao.listAllCategories().size(); i++){
+                categoryDao.updateSequence(i + 1, categoryDao.listAllCategories().get(i).getId());
+            }
+            return new CustomResponseStatus(Response.SUCCESS, "Deleted successfully.");
+        } else {
+            return new CustomResponseStatus(Response.FAILED, "This category is already deleted.");
+        }
+    }
 }
