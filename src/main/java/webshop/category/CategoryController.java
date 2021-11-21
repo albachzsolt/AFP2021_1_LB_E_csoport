@@ -45,4 +45,15 @@ public class CategoryController {
     public CustomResponseStatus deleteCategoryAndUpdateProductCategoryToNoCategory(@PathVariable long categoryId){
         return categoryService.deleteCategoryAndUpdateProductCategoryId(categoryId);
     }
+
+    @PostMapping("api/categories/update")
+    public CustomResponseStatus updateAllCategories(@RequestBody List<Category> categories){
+        return categoryService.updateAllCategories(categories);
+    }
+
+    @GetMapping("/api/category/{categoryName}")
+    public Category listProductsByCategoryName(@PathVariable String categoryName){
+
+        return categoryService.getCategoryWithProductsByName(categoryName.replaceAll("_"," "));
+    }
 }
