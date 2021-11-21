@@ -1,6 +1,8 @@
 package webshop.product;
 
 import org.springframework.stereotype.Service;
+import webshop.CustomResponseStatus;
+import webshop.Response;
 import webshop.category.Category;
 import webshop.category.CategoryDao;
 
@@ -37,6 +39,24 @@ public class ProductService {
             throw new IllegalArgumentException("This name already exists.");
         }
         return productDao.addNewProductAndGetId(category, foundCategory.getId());
+    }
+
+    public CustomResponseStatus updateProduct(long id, Category category) {
+
+        Category foundCategory = categoryDao.getIdOfTheUpdatedName(category);
+
+        if (!productDao.isIdTheSameForUpdatingTheSameCode(category.getProducts().get(0).getCode(), id)) {
+            return new CustomResponseStatus(Response.FAILED, String.format("Code must be unique and %s already exists in database", category.getProducts().get(0).getCode()));
+        }
+        if (!productDao.isIdTheSameForUpdatingTheSameName(category.getProducts().get(0).getName(), id)) {
+            return new CustomResponseStatus(Response.FAILED, String.format("Name must be unique and %s already exists in database", category.getProducts().get(0).getName()));
+        }
+        int responseInt = productDao.updateProduct(id, category, foundCategory.getId());
+        if (responseInt == 1) {
+            return new CustomResponseStatus(Response.SUCCESS, "Updated successfully.");
+        } else {
+            return new CustomResponseStatus(Response.FAILED, "Can not update.");
+        }
     }
 
     public Object findProductByAddressTwo(String address) {

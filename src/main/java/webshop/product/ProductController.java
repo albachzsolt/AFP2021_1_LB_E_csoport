@@ -16,17 +16,22 @@ public class ProductController {
 
     public static final String INVALID_ADDRESS = "Invalid address";
 
+    @GetMapping("/api/product/")
+    public Object throwErrorOnWrongAddress() {
+        return new CustomResponseStatus(Response.FAILED, INVALID_ADDRESS);
+    }
+
     @GetMapping("/api/product/{address}")
     public Object findProductByAddressTwo(@PathVariable String address) {
         productValidator = new ProductValidator(productService);
         if (productValidator.isValidAddress(address)) {
             try {
                 return productService.findProductByAddress(address);
-            } catch (Exception e){
+            } catch (Exception e) {
                 return new CustomResponseStatus(Response.FAILED, INVALID_ADDRESS);
             }
         } else {
-            return new CustomResponseStatus(Response.FAILED,  INVALID_ADDRESS);
+            return new CustomResponseStatus(Response.FAILED, INVALID_ADDRESS);
         }
     }
 
@@ -48,6 +53,16 @@ public class ProductController {
             }
         } catch (IllegalArgumentException iae) {
             return new CustomResponseStatus(Response.FAILED, iae.getMessage());
+        }
+    }
+
+    @PostMapping("/api/product/{productId}")
+    public CustomResponseStatus updateProduct(@PathVariable Long productId, @RequestBody Category category) {
+        CustomResponseStatus responseStatus = productValidator.validateProduct(category.getProducts().get(0));
+        if (responseStatus.getResponse().equals(Response.FAILED)) {
+            return responseStatus;
+        } else {
+            return productService.updateProduct(productId, category);
         }
     }
 }
