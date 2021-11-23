@@ -8,6 +8,8 @@ import webshop.CustomResponseStatus;
 import webshop.Response;
 import webshop.user.UserService;
 
+import java.util.List;
+
 @RestController
 public class UserController {
 
@@ -56,5 +58,10 @@ public class UserController {
             return userDao.getUserByUsername(authentication.getName());
         }
         return userDao.getUserByUsername(authentication.getName());
+    }
+
+    @GetMapping("/api/users")
+    public List<User> listAllUsers() {
+        return userService.listAllUsers();
     }
 }
