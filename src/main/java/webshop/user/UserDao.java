@@ -87,6 +87,22 @@ public class UserDao {
                 user.getUserRole().toString(), id);
     }
 
+    public void logicalDeleteUserById(long id) {
+        jdbcTemplate.update("update users set first_name = ?,last_name= ?,username = ?,enabled= ? where id = ?",
+                "John", "Doe", "DELETED_USER" + id, 0, id);
+    }
+
+    public boolean isAlreadyDeleted(long id) {
+        List<String> status = jdbcTemplate.query("select username from users where id = ?",
+            new RowMapper<String>() {
+            @Override
+            public String mapRow(ResultSet resultSet, int i) throws SQLException {
+                return resultSet.getString(USERNAME);
+            }
+        }, id);
+        return status.get(0).equals("DELETED_USER" + id);
+    }
+
     public void modifyUserNoPassword(long id, User user) {
         jdbcTemplate.update("update users set first_name = ?, last_name = ?, username = ?, role = ? where id = ?",
                 user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
