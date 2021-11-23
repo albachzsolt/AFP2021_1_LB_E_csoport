@@ -64,4 +64,26 @@ public class UserController {
     public List<User> listAllUsers() {
         return userService.listAllUsers();
     }
+
+    @PostMapping("/api/users/{id}")
+    @ResponseBody
+    public CustomResponseStatus checkPasswordAndModifyUser(@PathVariable long id, @RequestBody User user) {
+        if (validator.userCanBeUpdated(user)) {
+            try {
+                userService.checkPasswordAndModifyUser(id, user);
+                return new CustomResponseStatus(Response.SUCCESS, "User updated!");
+            }
+            catch (org.springframework.dao.DuplicateKeyException exc) {
+                return new CustomResponseStatus(Response.FAILED, "This username already exists.");
+            }
+        }
+        return new CustomResponseStatus(Response.FAILED, "User update invalid!");
+    }
+
+    @DeleteMapping("/api/users/{id}")
+    public CustomResponseStatus logicalDeleteUserById(@PathVariable long id) {
+        return userService.logicalDeleteUserById(id);
+    }
+
+
 }
