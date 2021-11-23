@@ -1,4 +1,6 @@
 package webshop.order;
 
-public class OrderValidator {
+import webshop.Validator;
+
+public class OrderValidator implements Validator {
 }
