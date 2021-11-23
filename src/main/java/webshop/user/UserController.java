@@ -2,9 +2,8 @@ package webshop.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 import webshop.CustomResponseStatus;
 import webshop.Response;
 import webshop.user.UserService;
@@ -27,17 +26,27 @@ public class UserController {
         long newUserId = 0;
         try {
             newUserId = userService.createUserAndReturnUserId(user);
-        } catch (DuplicateKeyException dke) {
-            return new CustomResponseStatus(Response.FAILED, String.format("User already exists. " +
-                            "New user can " +
-                            "not be created for %s.",
-                    user.getUsername()));
+        }
+        catch (DuplicateKeyException dke) {
+            return new CustomResponseStatus(Response.FAILED, String.format("User already exists. New user can " +
+                "not be created for %s.", user.getUsername()));
         }
         if (newUserId > 0) {
-            return new CustomResponseStatus(Response.SUCCESS, String.format("User %s " +
-                            "successfully created.",
-                    user.getUsername()));
+            return new CustomResponseStatus(Response.SUCCESS, String.format("User %s " + "successfully created.",
+                user.getUsername()));
         }
         return new CustomResponseStatus(Response.FAILED, "Error! User was not created.");
+    }
+
+    @GetMapping("/userdata")
+    @ResponseBody
+    public UserData currentUserName(Authentication authentication) {
+        if (authentication != null) {
+            String userRole = ((authentication.getAuthorities().toArray())[0]).toString();
+            return new UserData(authentication.getName(), UserRole.valueOf(userRole));
+        }
+        else {
+            return new UserData("", UserRole.NOT_AUTHENTICATED);
+        }
     }
 }
