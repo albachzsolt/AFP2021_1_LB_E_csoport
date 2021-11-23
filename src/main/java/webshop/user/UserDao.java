@@ -81,12 +81,6 @@ public class UserDao {
         jdbcTemplate.update("delete from users");
     }
 
-    public void modifyUser(long id, User user) {
-        jdbcTemplate.update("update users set first_name = ?, last_name = ?, username = ?, password = ?, role = ? " +
-                "where id = ?", user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
-                user.getUserRole().toString(), id);
-    }
-
     public void logicalDeleteUserById(long id) {
         jdbcTemplate.update("update users set first_name = ?,last_name= ?,username = ?,enabled= ? where id = ?",
                 "John", "Doe", "DELETED_USER" + id, 0, id);
@@ -95,18 +89,39 @@ public class UserDao {
     public boolean isAlreadyDeleted(long id) {
         List<String> status = jdbcTemplate.query("select username from users where id = ?",
             new RowMapper<String>() {
-            @Override
-            public String mapRow(ResultSet resultSet, int i) throws SQLException {
-                return resultSet.getString(USERNAME);
-            }
-        }, id);
+                @Override
+                public String mapRow(ResultSet resultSet, int i) throws SQLException {
+                   return resultSet.getString(USERNAME);
+                }
+            }, id);
         return status.get(0).equals("DELETED_USER" + id);
+    }
+
+    public void modifyUser(long id, User user) {
+        jdbcTemplate.update("update users set first_name = ?, last_name = ?, username = ?, password = ?, role = ? " +
+                        "where id = ?", user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
+                user.getUserRole().toString(), id);
     }
 
     public void modifyUserNoPassword(long id, User user) {
         jdbcTemplate.update("update users set first_name = ?, last_name = ?, username = ?, role = ? where id = ?",
                 user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
                 user.getUserRole().toString(), id);
+    }
+
+    public void modifyUserByUser(long id, User user) {
+        jdbcTemplate.update("update users set first_name = ?, last_name = ?, username = ?, password = ? where id = ?",
+                user.getFirstName(),user.getLastName(),user.getUsername(), user.getPassword(), id);
+    }
+
+    public void modifyUserByUserNoPassword(long id,User user){
+        jdbcTemplate.update("update users set first_name = ?,last_name=?,username= ? where id = ?",
+                user.getFirstName(),user.getLastName(),user.getUsername(),  id);
+    }
+
+    public int countAllUsers() {
+        return jdbcTemplate.queryForObject("select count(id) from users",
+                ((rs, i) -> rs.getInt("count(id)")));
     }
 
     public List<Long> listUserIds() {
@@ -122,5 +137,10 @@ public class UserDao {
         return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).queryForObject("select id, first_name, " +
                 "last_name, username, password, enabled, role from users where id = (:userId)",
                 Map.of("userId", userId), USER_ROW_MAPPER);
+    }
+
+    public User findUserById(long id) throws EmptyResultDataAccessException {
+        return jdbcTemplate.queryForObject("select id, first_name, last_name, username, password, enabled, role " +
+                "from users where id = ?", USER_ROW_MAPPER, id);
     }
 }
