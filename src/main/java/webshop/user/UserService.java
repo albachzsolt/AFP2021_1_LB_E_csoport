@@ -1,6 +1,7 @@
 package webshop.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import webshop.basket.BasketDao;
 
@@ -38,5 +39,17 @@ public class UserService {
 
     public List<Long> listUserIds() {
         return userDao.listUserIds();
+    }
+
+    public long createAndReturnUserId(User user) throws DuplicateKeyException {
+        long newlyCreatedUserId = userDao.createUserAndReturnUserId(user);
+        if (newlyCreatedUserId == 0) {
+            return 0;
+        }
+        long basketId = basketDao.createBasketForUserIdAndReturnBasketId(newlyCreatedUserId);
+        if (basketId < 1) {
+            throw new IllegalStateException("Basket was not created for userId: " + newlyCreatedUserId);
+        }
+        return newlyCreatedUserId;
     }
 }
