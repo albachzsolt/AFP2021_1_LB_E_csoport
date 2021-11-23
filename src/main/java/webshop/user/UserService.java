@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import webshop.basket.BasketDao;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -16,5 +18,17 @@ public class UserService {
     public UserService(UserDao userDao, BasketDao basketDao) {
         this.userDao = userDao;
         this.basketDao = basketDao;
+    }
+
+    public List<String> getAllUsernames() {
+        return userDao.getAllUsernames();
+    }
+
+    public User getUserByUsername(String username) {
+        return userDao.getUserByUsername(username);
+    }
+
+    public List<User> listAllUsers() {
+        return userDao.listAllUsers();
     }
 }
