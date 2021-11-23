@@ -92,4 +92,19 @@ public class UserDao {
                 user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
                 user.getUserRole().toString(), id);
     }
+
+    public List<Long> listUserIds() {
+        return jdbcTemplate.query("select id from users order by id", new RowMapper<Long>() {
+            @Override
+            public Long mapRow(ResultSet resultSet, int i) throws SQLException {
+                return resultSet.getLong("id");
+            }
+        });
+    }
+
+    public User getUserByUserId(long userId) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).queryForObject("select id, first_name, " +
+                "last_name, username, password, enabled, role from users where id = (:userId)",
+                Map.of("userId", userId), USER_ROW_MAPPER);
+    }
 }
