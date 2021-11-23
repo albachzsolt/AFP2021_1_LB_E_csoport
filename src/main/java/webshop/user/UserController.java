@@ -49,4 +49,12 @@ public class UserController {
             return new UserData("", UserRole.NOT_AUTHENTICATED);
         }
     }
+
+    @GetMapping("/currentuserdata")
+    public User currentUser(Authentication authentication) {
+        if (authentication != null) {
+            return userDao.getUserByUsername(authentication.getName());
+        }
+        return userDao.getUserByUsername(authentication.getName());
+    }
 }
