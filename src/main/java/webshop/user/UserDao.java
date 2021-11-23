@@ -19,7 +19,19 @@ import java.util.Map;
 public class UserDao {
 
     private JdbcTemplate jdbcTemplate;
+
     private static final String USERNAME = "username";
+
+    private static final RowMapper<User> USER_ROW_MAPPER = (resultSet, i) -> {
+        long id = resultSet.getLong("id");
+        String firstName = resultSet.getString("first_name");
+        String lastName = resultSet.getString("last_name");
+        String username = resultSet.getString(USERNAME);
+        String password = resultSet.getString("password");
+        int enabled = resultSet.getInt("enabled");
+        UserRole role = UserRole.valueOf(resultSet.getString("role"));
+        return new User(id, firstName, lastName, username, password, enabled, role);
+    };
 
     public UserDao(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -51,8 +63,14 @@ public class UserDao {
                 (resultSet, i) -> resultSet.getString(USERNAME));
     }
 
+    public User getUserByUsername(String username) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).queryForObject("select id, first_name, " +
+                "last_name, username, password, enabled, role from users where username = (:username)",
+                Map.of(USERNAME, username), USER_ROW_MAPPER);
+    }
+
     public List<User> listAllUsers() {
-        return jdbcTemplate.query("select id, first_name, last_name, username, password, role, enabled from users" +
+        return jdbcTemplate.query("select id, first_name, last_name, username, password, role, enabled from users " +
                 "order by username", (rs, rowNum) -> new User(rs.getInt("id"),
                 rs.getString("first_name"), rs.getString("last_name"), rs.getString(USERNAME),
                 rs.getString("password"), rs.getInt("enabled"),
