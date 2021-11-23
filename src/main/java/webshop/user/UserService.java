@@ -31,4 +31,12 @@ public class UserService {
     public List<User> listAllUsers() {
         return userDao.listAllUsers();
     }
+
+    public User findUserByUsername(String username) {
+        return userDao.getUserByUsername(username);
+    }
+
+    public List<Long> listUserIds() {
+        return userDao.listUserIds();
+    }
 }
