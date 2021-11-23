@@ -43,7 +43,7 @@ public class UserService {
         return userDao.listUserIds();
     }
 
-    public long createAndReturnUserId(User user) throws DuplicateKeyException {
+    public long createUserAndReturnUserId(User user) throws DuplicateKeyException {
         long newlyCreatedUserId = userDao.createUserAndReturnUserId(user);
         if (newlyCreatedUserId == 0) {
             return 0;
