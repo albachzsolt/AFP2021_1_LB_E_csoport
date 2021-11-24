@@ -2,6 +2,7 @@ package webshop.basket;
 
 import org.springframework.stereotype.Service;
 import webshop.product.ProductDao;
+import webshop.product.ProductData;
 import webshop.user.User;
 import webshop.user.UserDao;
 import webshop.user.UserData;
@@ -39,6 +40,14 @@ public class BasketService {
         int sumPrice = basketDao.sumProductPriceInBasketByBasketId(basketId);
 
         return new BasketData(sumPieces, sumPrice, basket);
+    }
+
+    public int addProductToLoggedInBasketByProductData(String loggedInUsername, ProductData productData) {
+        long userId = userDao.getUserByUsername(loggedInUsername).getId();
+        long basketId = getOrCreateAndReturnBasketIdByUserId(userId);
+        int quantity = productData.getProductPieces();
+        long productId = productDao.getProductIdByProductCode(productData.getProductCode());
+        return basketDao.addProductToBasket(basketId, productId, quantity);
     }
 
     private long getOrCreateAndReturnBasketIdByUserId(long userId) {
