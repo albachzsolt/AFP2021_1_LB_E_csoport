@@ -1,9 +1,10 @@
 package webshop.basket;
 
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import webshop.CustomResponseStatus;
+import webshop.Response;
+import webshop.product.ProductData;
 import webshop.user.UserData;
 import webshop.user.UserRole;
 
@@ -28,6 +29,25 @@ public class BasketController {
                     UserRole.NOT_AUTHENTICATED))));
         }
     }
+
+    @PostMapping("/basket")
+    public CustomResponseStatus addProductToLoggedInBasket(Authentication authentication,
+                                                           @RequestBody ProductData productData) {
+        if (authentication != null) {
+            String loggedInUsername = authentication.getName();
+            int numberOfSqlAffectedRows =
+                    basketService.addProductToLoggedInBasketByProductData(loggedInUsername,
+                            productData);
+            if (numberOfSqlAffectedRows != 1) {
+                return new CustomResponseStatus(Response.FAILED, "Error. Could not add to basket.");
+            } else {
+                return new CustomResponseStatus(Response.SUCCESS, "Succesfully added to basket.");
+            }
+        } else {
+            return new CustomResponseStatus(Response.FAILED, "Please sign in to start shopping.");
+        }
+    }
+
 
 
 }
