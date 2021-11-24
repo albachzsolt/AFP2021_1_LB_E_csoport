@@ -62,6 +62,14 @@ public class BasketService {
         return basketDao.deleteOneProductFromBusket(basketId,productId);
     }
 
+    public int updateProductQuantityInoLoggedInBasket(String loggedInUsername, ProductData productData) {
+        long userId = userDao.getUserByUsername(loggedInUsername).getId();
+        long basketId = getOrCreateAndReturnBasketIdByUserId(userId);
+        int quantity = productData.getProductPieces();
+        long productId = productDao.getProductIdByProductCode(productData.getProductCode());
+        return basketDao.updateProductQuantityInBasket(basketId, productId, quantity);
+    }
+
     private long getOrCreateAndReturnBasketIdByUserId(long userId) {
         long basketId = 0;
         if (!basketDao.getAllBasketOwnerIds().contains(userId)) {
