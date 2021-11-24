@@ -56,6 +56,12 @@ public class BasketService {
         return basketDao.clearBasketByBasketId(basketId);
     }
 
+    public int deleteOneProductFromBusket(String loggedInUsername, Long productId){
+        long userId = userDao.getUserByUsername(loggedInUsername).getId();
+        long basketId = getOrCreateAndReturnBasketIdByUserId(userId);
+        return basketDao.deleteOneProductFromBusket(basketId,productId);
+    }
+
     private long getOrCreateAndReturnBasketIdByUserId(long userId) {
         long basketId = 0;
         if (!basketDao.getAllBasketOwnerIds().contains(userId)) {
