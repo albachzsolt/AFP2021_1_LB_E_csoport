@@ -81,4 +81,21 @@ public class BasketController {
         }
     }
 
+    @PostMapping("/basket/update")
+    public CustomResponseStatus updateProductQuantityInoLoggedInBasket(Authentication authentication,
+                                                                       @RequestBody ProductData productData) {
+        if (authentication != null) {
+            String loggedInUsername = authentication.getName();
+            int numberOfSqlAffectedRows =
+                    basketService.updateProductQuantityInoLoggedInBasket(loggedInUsername,
+                            productData);
+            if (numberOfSqlAffectedRows != 1) {
+                return new CustomResponseStatus(Response.FAILED, "Error. Could not update basket.");
+            } else {
+                return new CustomResponseStatus(Response.SUCCESS, "Basket successfully updated.");
+            }
+        } else {
+            return new CustomResponseStatus(Response.FAILED, "Please sign in to manage your basket.");
+        }
+    }
 }
