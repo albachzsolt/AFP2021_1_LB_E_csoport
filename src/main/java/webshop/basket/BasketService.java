@@ -21,5 +21,36 @@ public class BasketService {
         this.productDao = productDao;
     }
 
+    public BasketData getBasketDataByUser(String loggedInUsername) {
 
+        User user = userDao.getUserByUsername(loggedInUsername);
+
+        long userId = user.getId();
+        long basketId = getOrCreateAndReturnBasketIdByUserId(userId);
+
+        List<BasketItem> actualItemsInBasket = basketDao.getBasketItemsInBasketByBasketId(basketId);
+
+        Basket basket = new Basket(basketId, new UserData(user.getUsername(), user.getUserRole()));
+        for (BasketItem basketItem : actualItemsInBasket) {
+            basket.addBasketItem(basketItem);
+        }
+
+        int sumPieces = basketDao.sumProductPiecesInBasketByBasketId(basketId);
+        int sumPrice = basketDao.sumProductPriceInBasketByBasketId(basketId);
+
+        return new BasketData(sumPieces, sumPrice, basket);
+    }
+
+    private long getOrCreateAndReturnBasketIdByUserId(long userId) {
+        long basketId = 0;
+        if (!basketDao.getAllBasketOwnerIds().contains(userId)) {
+            basketId = basketDao.createBasketForUserIdAndReturnBasketId(userId);
+        } else {
+            basketId = basketDao.getBasketIdByUserId(userId);
+        }
+        if (basketId == 0) {
+            throw new IllegalStateException("Basket does not exist.");
+        }
+        return basketId;
+    }
 }
