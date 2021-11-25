@@ -71,4 +71,23 @@ public class OrderDao {
                 "(SELECT SUM(order_price) from ordered_items WHERE orders.id = ordered_items.order_id) total_price, " +
                 "shipping_address from orders ORDER BY order_time DESC;", ORDER_ROW_MAPPER);
     }
+
+    private static final RowMapper<OrderData> ORDER_DATA_ROW_MAPPER = (resultSet, i) -> {
+        long orderId = resultSet.getLong(ORDER_ID);
+        String username = resultSet.getString("username");
+        LocalDateTime orderTime = resultSet.getTimestamp("order_time").toLocalDateTime();
+        OrderStatus orderStatus = OrderStatus.valueOf(resultSet.getString(STATUS));
+        long sumOrderPrice = resultSet.getLong("sum_price");
+        String shippingAddress = resultSet.getString(SHIPPING_ADDRESS);
+        int sumOrderPieces = resultSet.getInt("sum_pieces");
+        return new OrderData(orderId, username, orderTime, orderStatus, shippingAddress, sumOrderPrice, sumOrderPieces);
+    };
+
+
+    public List<OrderData> listAllOrderData() {
+        return jdbcTemplate.query("SELECT orders.id order_id, username, order_time, status, shipping_address, " +
+                "SUM(order_price) sum_price, SUM(quantity) sum_pieces FROM orders JOIN users " +
+                "ON orders.user_id = users.id JOIN ordered_items ON order_id = orders.id GROUP BY orders.id, username, " +
+                "order_time, status ORDER BY orders.order_time DESC", ORDER_DATA_ROW_MAPPER);
+    }
 }
