@@ -154,4 +154,16 @@ public class OrderDao {
                 "SET status = (:new_status) where id = (:order_id);",
                 Map.of(ORDER_ID, orderId, "new_status", newOrderStatus));
     }
+
+    private static final RowMapper<Order> ORDER_ROW_MAPPER_WITH_SHIPPING_ADDRESS_ONLY = (resultSet, i) -> {
+        String shippingAddress = resultSet.getString(SHIPPING_ADDRESS);
+        return new Order(0, 0, null, null, 0, shippingAddress);
+    };
+
+    public List<Order> getOrderListByUserIdWithFormerShippingAddressesOnly(long userId) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).query("SELECT DISTINCT " +
+                "TRIM(shipping_address) shipping_address FROM orders where user_id = (:user_id) AND shipping_address " +
+                "IS NOT NULL AND shipping_address <>'' ORDER BY shipping_address",
+                Map.of(USER_ID, userId), ORDER_ROW_MAPPER_WITH_SHIPPING_ADDRESS_ONLY);
+    }
 }
