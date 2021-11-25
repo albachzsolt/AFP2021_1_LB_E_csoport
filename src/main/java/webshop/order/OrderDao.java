@@ -134,4 +134,24 @@ public class OrderDao {
                         "where order_id = (:order_id) AND product_id = (SELECT id FROM products WHERE address = (:product_address));",
                 Map.of(ORDER_ID, orderId, "product_address", productAddress));
     }
+
+    public List<OrderData> listFilteredOrderData(String filter) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).query("SELECT orders.id order_id, " +
+                "username, order_time, status, shipping_address, SUM(order_price) sum_price, SUM(quantity) sum_pieces " +
+                "FROM orders JOIN users ON orders.user_id = users.id JOIN ordered_items ON order_id = orders.id " +
+                "WHERE status = (:status) GROUP BY orders.id, username, order_time, status " +
+                "ORDER BY orders.order_time DESC", Map.of(STATUS, filter), ORDER_DATA_ROW_MAPPER);
+    }
+
+    public OrderStatus getOrderStatusByOrderId(long orderId) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).queryForObject("SELECT status " +
+                "FROM orders WHERE id = (:id)",
+                Map.of("id", orderId), (resultSet, i) -> OrderStatus.valueOf(resultSet.getString(STATUS)));
+    }
+
+    public int updateOrderStatus(long orderId, String newOrderStatus) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).update("UPDATE orders " +
+                "SET status = (:new_status) where id = (:order_id);",
+                Map.of(ORDER_ID, orderId, "new_status", newOrderStatus));
+    }
 }
