@@ -112,4 +112,58 @@ public class OrderDao {
                         "ON ordered_items.product_id = products.id where order_id = (:order_id) ORDER BY name",
                 Map.of(ORDER_ID, orderId), ORDER_ITEM_ROW_MAPPER);
     }
+
+
+    public int logicalDeleteOrderByOrderId(long orderId) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).update("UPDATE orders SET " +
+                "status = 'DELETED' where id = (:order_id);", Map.of(ORDER_ID, orderId));
+    }
+
+    public int countActiveOrders() {
+        return jdbcTemplate.queryForObject("SELECT count(id) FROM `orders` WHERE status = 'ACTIVE'",
+                (rs, i) -> rs.getInt("count(id)"));
+    }
+
+    public int countAllOrders() {
+        return jdbcTemplate.queryForObject("SELECT count(id) FROM `orders`",
+                (rs, i) -> rs.getInt("count(id)"));
+    }
+
+    public int deleteItemFromOrderByProductAddress(long orderId, String productAddress) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).update("DELETE FROM ordered_items " +
+                        "where order_id = (:order_id) AND product_id = (SELECT id FROM products WHERE address = (:product_address));",
+                Map.of(ORDER_ID, orderId, "product_address", productAddress));
+    }
+
+    public List<OrderData> listFilteredOrderData(String filter) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).query("SELECT orders.id order_id, " +
+                "username, order_time, status, shipping_address, SUM(order_price) sum_price, SUM(quantity) sum_pieces " +
+                "FROM orders JOIN users ON orders.user_id = users.id JOIN ordered_items ON order_id = orders.id " +
+                "WHERE status = (:status) GROUP BY orders.id, username, order_time, status " +
+                "ORDER BY orders.order_time DESC", Map.of(STATUS, filter), ORDER_DATA_ROW_MAPPER);
+    }
+
+    public OrderStatus getOrderStatusByOrderId(long orderId) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).queryForObject("SELECT status " +
+                "FROM orders WHERE id = (:id)",
+                Map.of("id", orderId), (resultSet, i) -> OrderStatus.valueOf(resultSet.getString(STATUS)));
+    }
+
+    public int updateOrderStatus(long orderId, String newOrderStatus) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).update("UPDATE orders " +
+                "SET status = (:new_status) where id = (:order_id);",
+                Map.of(ORDER_ID, orderId, "new_status", newOrderStatus));
+    }
+
+    private static final RowMapper<Order> ORDER_ROW_MAPPER_WITH_SHIPPING_ADDRESS_ONLY = (resultSet, i) -> {
+        String shippingAddress = resultSet.getString(SHIPPING_ADDRESS);
+        return new Order(0, 0, null, null, 0, shippingAddress);
+    };
+
+    public List<Order> getOrderListByUserIdWithFormerShippingAddressesOnly(long userId) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).query("SELECT DISTINCT " +
+                "TRIM(shipping_address) shipping_address FROM orders where user_id = (:user_id) AND shipping_address " +
+                "IS NOT NULL AND shipping_address <>'' ORDER BY shipping_address",
+                Map.of(USER_ID, userId), ORDER_ROW_MAPPER_WITH_SHIPPING_ADDRESS_ONLY);
+    }
 }
