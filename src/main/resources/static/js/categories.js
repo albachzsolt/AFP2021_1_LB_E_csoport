@@ -89,3 +89,17 @@ function addNewProduct() {
 
 var addButton = document.getElementById('add-btn');
 addButton.onclick = addNewProduct;
+
+var newProductButton = document.getElementById('new-product-btn');
+newProductButton.onclick = function () {
+    showInputFields();
+};
+
+function showInputFields() {
+    var formInput = document.querySelector('#form-input');
+    if (formInput.getAttribute('class') == 'disabled'){
+        formInput.setAttribute('class', 'enabled');
+    } else {
+        formInput.setAttribute('class', 'disabled')
+    }
+}
