@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import webshop.product.Product;
+import webshop.product.ProductStatus;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -89,5 +91,25 @@ public class OrderDao {
                 "SUM(order_price) sum_price, SUM(quantity) sum_pieces FROM orders JOIN users " +
                 "ON orders.user_id = users.id JOIN ordered_items ON order_id = orders.id GROUP BY orders.id, username, " +
                 "order_time, status ORDER BY orders.order_time DESC", ORDER_DATA_ROW_MAPPER);
+    }
+
+    private static final RowMapper<OrderItem> ORDER_ITEM_ROW_MAPPER = (resultSet, i) -> {
+        String priceString = resultSet.getString("order_price").split(" ")[0];
+        long productId = resultSet.getLong("id");
+        String productCode = resultSet.getString("code");
+        String productName = resultSet.getString("name");
+        String productManufacturer = resultSet.getString("manufacturer");
+        int productOrderPrice = Integer.parseInt(priceString);
+        ProductStatus productStatus = ProductStatus.valueOf(resultSet.getString(STATUS));
+        int pieces = resultSet.getInt("quantity");
+        return new OrderItem((new Product(productId, productCode, productName, productManufacturer, productOrderPrice,
+                productStatus)), pieces);
+    };
+
+    public List<OrderItem> listOrderItemsByOrderId(long orderId) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).query("SELECT id, code, name, " +
+                        "manufacturer, order_price, status, quantity FROM ordered_items JOIN products " +
+                        "ON ordered_items.product_id = products.id where order_id = (:order_id) ORDER BY name",
+                Map.of(ORDER_ID, orderId), ORDER_ITEM_ROW_MAPPER);
     }
 }
