@@ -36,4 +36,10 @@ public class OrderDao {
         }, keyHolder);
         return keyHolder.getKey().longValue();
     }
+
+    public void insertIntoOrderedItemsFromBasketItemsByOrderId(long orderId, long productId, int quantity,
+                                                               long totalPrice) {
+        jdbcTemplate.update("insert into ordered_items set order_id = ?, product_id = ?, quantity = ?, " +
+                "order_price = ?", orderId, productId, quantity, totalPrice);
+    }
 }
