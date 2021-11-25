@@ -112,4 +112,26 @@ public class OrderDao {
                         "ON ordered_items.product_id = products.id where order_id = (:order_id) ORDER BY name",
                 Map.of(ORDER_ID, orderId), ORDER_ITEM_ROW_MAPPER);
     }
+
+
+    public int logicalDeleteOrderByOrderId(long orderId) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).update("UPDATE orders SET " +
+                "status = 'DELETED' where id = (:order_id);", Map.of(ORDER_ID, orderId));
+    }
+
+    public int countActiveOrders() {
+        return jdbcTemplate.queryForObject("SELECT count(id) FROM `orders` WHERE status = 'ACTIVE'",
+                (rs, i) -> rs.getInt("count(id)"));
+    }
+
+    public int countAllOrders() {
+        return jdbcTemplate.queryForObject("SELECT count(id) FROM `orders`",
+                (rs, i) -> rs.getInt("count(id)"));
+    }
+
+    public int deleteItemFromOrderByProductAddress(long orderId, String productAddress) {
+        return new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource()).update("DELETE FROM ordered_items " +
+                        "where order_id = (:order_id) AND product_id = (SELECT id FROM products WHERE address = (:product_address));",
+                Map.of(ORDER_ID, orderId, "product_address", productAddress));
+    }
 }
