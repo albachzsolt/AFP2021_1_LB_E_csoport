@@ -6,12 +6,14 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class OrderDao {
     private JdbcTemplate jdbcTemplate;
 
@@ -62,5 +64,11 @@ public class OrderDao {
                 "status, shipping_address, (select sum(order_price) from ordered_items " +
                 "where orders.id = ordered_items.order_id) total_price, shipping_address from orders " +
                 "where user_id = (:user_id) order by order_time desc;", Map.of(USER_ID, userId), ORDER_ROW_MAPPER);
+    }
+
+    public List<Order> listAllOrders() {
+        return jdbcTemplate.query("SELECT id, user_id, order_time, status, shipping_address, " +
+                "(SELECT SUM(order_price) from ordered_items WHERE orders.id = ordered_items.order_id) total_price, " +
+                "shipping_address from orders ORDER BY order_time DESC;", ORDER_ROW_MAPPER);
     }
 }
