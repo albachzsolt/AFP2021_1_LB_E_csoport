@@ -52,3 +52,40 @@ function deleteCategory() {
         });
     return false;
 }
+
+function addNewProduct() {
+    var nameInput = document.getElementById('name').value;
+    var sequenceInput = document.getElementById('sequence').value;
+
+    var request = {
+        "categoryName": nameInput,
+        "sequence" : sequenceInput
+    };
+
+    fetch('/api/categories', {
+        method: 'POST',
+        body: JSON.stringify(request),
+        headers: {
+            'Content-type': 'application/json'
+        }
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (jsonData) {
+            if (jsonData.response == 'SUCCESS') {
+                document.getElementById('name').value = '';
+                document.getElementById('sequence').value = '';
+                getCategories();
+                document.getElementById('message-div').innerHTML = jsonData.message;
+                document.getElementById('message-div').setAttribute('class', 'alert alert-success');
+            } else {
+                document.getElementById('message-div').innerHTML = jsonData.message;
+                document.getElementById('message-div').setAttribute('class', 'alert alert-danger');
+            }
+        });
+    return false;
+}
+
+var addButton = document.getElementById('add-btn');
+addButton.onclick = addNewProduct;
