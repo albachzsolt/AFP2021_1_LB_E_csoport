@@ -25,3 +25,30 @@ function showCategories(jsonData) {
         }
     }
 }
+
+
+function deleteCategory() {
+    var id = this.event.target.id
+
+    if (!confirm('Are you sure to delete?')) {
+        return;
+    }
+
+    fetch('/api/category/' + id, {
+        method: 'DELETE'
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (jsonData) {
+            if (jsonData.response == 'SUCCESS') {
+                getCategories();
+                document.getElementById('message-div').innerHTML = jsonData.message;
+                document.getElementById('message-div').setAttribute('class', 'alert alert-success');
+            } else {
+                document.getElementById('message-div').innerHTML = jsonData.message;
+                document.getElementById('message-div').setAttribute('class', 'alert alert-danger');
+            }
+        });
+    return false;
+}
