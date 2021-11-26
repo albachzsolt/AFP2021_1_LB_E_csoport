@@ -26,6 +26,30 @@ function showCategories(jsonData) {
     }
 }
 
+function save() {
+    var request = [];
+    var lis = document.getElementById('sortable').getElementsByTagName('li');
+    for (var i = 0; i < lis.length; i++) {
+        const e = lis[i];
+        request.push({
+            'id': e.id.split("-")[1],
+            'categoryName': e.getElementsByTagName('label')[1].innerHTML.trim(),
+            'sequence': i + 1
+        });
+    }
+    fetch('api/categories/update', {
+        method: 'GET',
+        body: JSON.stringify(request),
+        headers: {
+            'Content-type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(r => {
+            getCategories();
+        });
+}
+
 
 function deleteCategory() {
     var id = this.event.target.id
