@@ -38,7 +38,7 @@ function save() {
         });
     }
     fetch('api/categories/update', {
-        method: 'GET',
+        method: 'POST',
         body: JSON.stringify(request),
         headers: {
             'Content-type': 'application/json'
