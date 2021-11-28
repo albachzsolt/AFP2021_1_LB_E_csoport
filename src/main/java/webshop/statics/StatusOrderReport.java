@@ -62,4 +62,17 @@ public class StatusOrderReport {
     public void setSumOfAmountDeletedOrdersForThisMonth(Integer sumOfAmountDeletedOrdersForThisMonth) {
         this.sumOfAmountDeletedOrdersForThisMonth = sumOfAmountDeletedOrdersForThisMonth;
     }
+
+    @Override
+    public String toString() {
+        return "StatusOrderReport{" +
+                "year=" + year +
+                ", month=" + month +
+                ", sumOfActiveOrdersForThisMonth=" + sumOfActiveOrdersForThisMonth +
+                ", sumOfAmountForActiveOrdersForThisMonth=" + sumOfAmountForActiveOrdersForThisMonth +
+                ", sumOfDeliveredOrdersForThisMonth=" + sumOfDeliveredOrdersForThisMonth +
+                ", sumOfDeletedOrdersForThisMonth=" + sumOfDeletedOrdersForThisMonth +
+                ", sumOfAmountDeletedOrdersForThisMonth=" + sumOfAmountDeletedOrdersForThisMonth +
+                '}';
+    }
 }
