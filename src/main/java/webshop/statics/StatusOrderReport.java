@@ -22,4 +22,44 @@ public class StatusOrderReport {
     public int getMonth() {
         return month;
     }
+
+    public Integer getSumOfActiveOrdersForThisMonth() {
+        return sumOfActiveOrdersForThisMonth;
+    }
+
+    public void setSumOfActiveOrdersForThisMonth(Integer sumOfActiveOrdersForThisMonth) {
+        this.sumOfActiveOrdersForThisMonth = sumOfActiveOrdersForThisMonth;
+    }
+
+    public Integer getSumOfAmountForActiveOrdersForThisMonth() {
+        return sumOfAmountForActiveOrdersForThisMonth;
+    }
+
+    public void setSumOfAmountForActiveOrdersForThisMonth(Integer sumOfAmountForActiveOrdersForThisMonth) {
+        this.sumOfAmountForActiveOrdersForThisMonth = sumOfAmountForActiveOrdersForThisMonth;
+    }
+
+    public Integer getSumOfDeliveredOrdersForThisMonth() {
+        return sumOfDeliveredOrdersForThisMonth;
+    }
+
+    public void setSumOfDeliveredOrdersForThisMonth(Integer sumOfDeliveredOrdersForThisMonth) {
+        this.sumOfDeliveredOrdersForThisMonth = sumOfDeliveredOrdersForThisMonth;
+    }
+
+    public Integer getSumOfDeletedOrdersForThisMonth() {
+        return sumOfDeletedOrdersForThisMonth;
+    }
+
+    public void setSumOfDeletedOrdersForThisMonth(Integer sumOfDeletedOrdersForThisMonth) {
+        this.sumOfDeletedOrdersForThisMonth = sumOfDeletedOrdersForThisMonth;
+    }
+
+    public Integer getSumOfAmountDeletedOrdersForThisMonth() {
+        return sumOfAmountDeletedOrdersForThisMonth;
+    }
+
+    public void setSumOfAmountDeletedOrdersForThisMonth(Integer sumOfAmountDeletedOrdersForThisMonth) {
+        this.sumOfAmountDeletedOrdersForThisMonth = sumOfAmountDeletedOrdersForThisMonth;
+    }
 }
