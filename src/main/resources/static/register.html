@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Create User</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="css/register.css">
+</head>
+
+<body>
+<div class = register-background></div>
+<div class="container">
+  <br><br><br><br><br><br>
+  <div id="left-id">
+    <h1>Register User</h1>
+    <br>
+
+    <form id="registration-form">
+      <input type="text" id="first-name-input" placeholder="First name" required>
+      <br>
+      <br>
+      <input type="text" id="last-name-input" placeholder="Last name" required>
+      <br>
+      <br>
+      <input type="text" id="username-input" placeholder="Username" required>
+      <br>
+      <br>
+      <input type="password" id="pass-input1" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+      <br><br>
+      <input type="password" id="pass-input2" placeholder="Re-type password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required >
+      <br>
+      <br>
+      <input type="submit" value="Create User">
+    </form></div>
+  <div id="message">
+    <h3>Password must contain the following:</h3>
+    <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+    <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+    <p id="number" class="invalid">A <b>number</b></p>
+    <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+  </div>
+
+
+</div>
+
+<script src="js/register.js"></script>
+<script src="js/menu.js"></script>
+</body>
+
+</html>
