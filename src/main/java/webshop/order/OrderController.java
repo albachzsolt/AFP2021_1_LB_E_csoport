@@ -87,4 +87,33 @@ public class OrderController {
     public List<OrderItem> listOrderItemsByOrderId(@PathVariable long orderId) {
         return orderService.listOrderItemsByOrderId(orderId);
     }
+
+    @DeleteMapping("/orders/{orderId}")
+    public CustomResponseStatus logicalDeleteOrderByOrderId(@PathVariable long orderId) {
+        if (orderService.isOrderDeleted(orderId)) {
+            return new CustomResponseStatus(Response.SUCCESS, String.format("Order %d is already deleted.", orderId));
+        }
+        if (orderService.isOrderDelivered(orderId)) {
+            return new CustomResponseStatus(Response.FAILED, String.format("Can not delete: order %d is already " +
+                    "delivered.", orderId));
+        }
+        if (orderService.logicalDeleteOrderByOrderId(orderId) == 1) {
+            return new CustomResponseStatus(Response.SUCCESS, String.format("Order %d successfully deleted.", orderId));
+        }
+        return new CustomResponseStatus(Response.FAILED, "An error occured during order delete.");
+    }
+
+    @DeleteMapping("/orders/{orderId}/{productAddress}")
+    public CustomResponseStatus deleteItemFromOrderByProductAddress(@PathVariable long orderId,
+                                                                    @PathVariable String productAddress) {
+        if (orderService.deleteItemFromOrderByProductAddress(orderId, productAddress) > 0) {
+            return new CustomResponseStatus(Response.SUCCESS, "Order item successfully removed from order.");
+        }
+        return new CustomResponseStatus(Response.FAILED, "An error occured during item delete from order.");
+    }
+
+    @GetMapping("/orders/filtered/{filter}")
+    public List<OrderData> listFilteredOrderData(@PathVariable String filter) {
+        return orderService.listFilteredOrderData(filter);
+    }
 }
