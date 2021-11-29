@@ -71,4 +71,16 @@ public class OrderService {
     public List<OrderData> listFilteredOrderData(String filter) {
         return orderDao.listFilteredOrderData(filter);
     }
+
+    public OrderStatus getOrderStatusByOrderId(long orderId) {
+        return orderDao.getOrderStatusByOrderId(orderId);
+    }
+
+    public boolean isOrderDeleted(long orderId) {
+        return getOrderStatusByOrderId(orderId) == OrderStatus.DELETED;
+    }
+
+    public boolean isOrderDelivered(long orderId) {
+        return getOrderStatusByOrderId(orderId) == OrderStatus.DELIVERED;
+    }
 }
