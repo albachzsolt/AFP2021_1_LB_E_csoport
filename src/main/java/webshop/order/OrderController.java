@@ -43,4 +43,27 @@ public class OrderController {
             return new CustomResponseStatus(Response.FAILED, "Please log in to order.");
         }
     }
+
+    @PostMapping("/myorders/storedaddresses")
+    @ResponseBody
+    public CustomResponseStatus sendOrderWithStoredAddress(Authentication authentication,
+                                                           @RequestBody Order orderWithShippingAddressOnly) {
+        if (authentication != null) {
+            String shippingAddress;
+            if (orderWithShippingAddressOnly == null) {
+                shippingAddress = "";
+            }
+            else {
+                shippingAddress = orderWithShippingAddressOnly.getShippingAddress();
+            }
+            if (orderValidator.isEmpty(shippingAddress)) {
+                return new CustomResponseStatus(Response.FAILED, "Shipping address can not be empty.");
+            }
+            String loggedInUsername = authentication.getName();
+            return orderService.placeOrder(loggedInUsername, shippingAddress);
+        }
+        else {
+            return new CustomResponseStatus(Response.FAILED, "Please log in to order.");
+        }
+    }
 }
