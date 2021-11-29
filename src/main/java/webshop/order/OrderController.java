@@ -1,12 +1,12 @@
 package webshop.order;
 
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import webshop.CustomResponseStatus;
 import webshop.Response;
+
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 public class OrderController {
@@ -65,5 +65,26 @@ public class OrderController {
         else {
             return new CustomResponseStatus(Response.FAILED, "Please log in to order.");
         }
+    }
+
+    @GetMapping("/myorders")
+    public List<Order> listOrdersByUserId(Authentication authentication) {
+        if (authentication != null) {
+            String loggedInUsername = authentication.getName();
+            return orderService.listOrdersByOrderId(loggedInUsername);
+        }
+        else {
+            return Collections.emptyList();
+        }
+    }
+
+    @GetMapping("/orders")
+    public List<OrderData> listAllOrderData() {
+        return orderService.listAllOrderData();
+    }
+
+    @GetMapping("/orders/{orderId}")
+    public List<OrderItem> listOrderItemsByOrderId(@PathVariable long orderId) {
+        return orderService.listOrderItemsByOrderId(orderId);
     }
 }
