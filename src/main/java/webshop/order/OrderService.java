@@ -59,4 +59,16 @@ public class OrderService {
     public List<OrderItem> listOrderItemsByOrderId(long orderId) {
         return orderDao.listOrderItemsByOrderId(orderId);
     }
+
+    public int logicalDeleteOrderByOrderId(long orderId) {
+        return orderDao.logicalDeleteOrderByOrderId(orderId);
+    }
+
+    public int deleteItemFromOrderByProductAddress(long orderId, String productAddress) {
+        return orderDao.deleteItemFromOrderByProductAddress(orderId, productAddress);
+    }
+
+    public List<OrderData> listFilteredOrderData(String filter) {
+        return orderDao.listFilteredOrderData(filter);
+    }
 }
