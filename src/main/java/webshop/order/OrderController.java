@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import webshop.CustomResponseStatus;
 import webshop.Response;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -115,5 +116,34 @@ public class OrderController {
     @GetMapping("/orders/filtered/{filter}")
     public List<OrderData> listFilteredOrderData(@PathVariable String filter) {
         return orderService.listFilteredOrderData(filter);
+    }
+
+    @PostMapping("/orders/{orderId}/status")
+    public CustomResponseStatus updateOrderStatus(@PathVariable long orderId) {
+        String newOrderStatus = "DELIVERED";
+        if (orderService.isOrderDelivered(orderId)) {
+            return new CustomResponseStatus(Response.SUCCESS, String.format("Order %d is already delivered.", orderId));
+        }
+        if (orderService.isOrderDeleted(orderId)) {
+            return new CustomResponseStatus(Response.FAILED, String.format("Can not change status: order %d is " +
+                            "already deleted.", orderId));
+        }
+        if (orderService.updateOrderStatus(orderId, newOrderStatus) == 1) {
+            return new CustomResponseStatus(Response.SUCCESS, String.format("Order status successfully updated for " +
+                            "order %d.", orderId));
+        }
+        return new CustomResponseStatus(Response.FAILED, "An error occured during order status update.");
+    }
+
+    @GetMapping(value = "/orders/shippingaddresses")
+    @ResponseBody
+    public List<Order> getFormerShippingAddressesForActualUser(Authentication authentication) {
+        if (authentication != null) {
+            String loggedInUsername = authentication.getName();
+            return orderService.getOrderListWithFormerShippingAddressesOnly(loggedInUsername);
+        }
+        else {
+            return new ArrayList<>();
+        }
     }
 }
