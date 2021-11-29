@@ -4,9 +4,49 @@
     <meta charset="UTF-8">
     <title>Admin product</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/menu.css">
 
 </head>
 <body>
+<div class="dashboard-background"></div>
+
+<div>
+    <button id="new-product-btn">
+        <img src="/img/add logo.png" alt="">Add new item
+    </button>
+
+    <!--    <div>
+            <form>
+        <input type="radio" id="radio-active" name="status" value="show active" class="radio-status-active"></input>
+                <label class="radio-label-active" for="radio-active">Show active</label>
+            <input type="radio" id="radio-all" name="status" value="show all" class="radio-status-all"></input>
+            <label class="radio-label-all" for="radio-all">Show all</label>
+            </form>
+        </div>-->
+    <br><br><br>
+
+    <form class="disabled" id="form-input">
+        <div class="form-input">Code</div> <input type="text" name="code" id="code"><br>
+        <div class="form-input">Name</div> <input type="text" name="name" id="name"><br>
+        <div class="form-input">Manufacturer</div> <input type="text" name="manufacturer" id="manufacturer"><br>
+        <div class="form-input">Price</div> <input type="text" name="price" id="price"><br>
+        <div class="form-input">
+            Category</div>
+        <select id="select-category">
+        </select>
+        <br><br>
+        <input type="submit" value="Add" id="add-btn"><br>
+    </form>
+
+
+
+    <div id ="main_div_adminproducts" class="main_div_adminproducts">
+    </div>
+</div>
+<button onclick="topFunction()" id="myBtn"></button>
+
+<script src="js/adminproducts.js"></script> <script src="js/menu.js"></script>
 
 </body>
 </html>
