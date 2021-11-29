@@ -38,4 +38,25 @@ public class OrderService {
         basketDao.clearBasketByBasketId(basketId);
         return new CustomResponseStatus(Response.SUCCESS, "Your order was placed, thank you for your purchase.");
     }
+
+    public List<Order> listOrdersByOrderId(String loggedInUsername) {
+        User user = userDao.getUserByUsername(loggedInUsername);
+
+        long userId = user.getId();
+
+        List<Order> orders = orderDao.listOrdersByUserId(userId);
+
+        for (Order order : orders) {
+            order.setOrderItems(orderDao.listOrderItemsByOrderId(order.getId()));
+        }
+        return orders;
+    }
+
+    public List<OrderData> listAllOrderData() {
+        return orderDao.listAllOrderData();
+    }
+
+    public List<OrderItem> listOrderItemsByOrderId(long orderId) {
+        return orderDao.listOrderItemsByOrderId(orderId);
+    }
 }
