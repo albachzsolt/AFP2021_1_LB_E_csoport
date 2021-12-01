@@ -7,6 +7,7 @@ public class StatusOrderReport {
     private Integer sumOfActiveOrdersForThisMonth;
     private Integer sumOfAmountForActiveOrdersForThisMonth;
     private Integer sumOfDeliveredOrdersForThisMonth;
+    private Integer sumOfAmountForDeliveredOrdersForThisMonth;
     private Integer sumOfDeletedOrdersForThisMonth;
     private Integer sumOfAmountDeletedOrdersForThisMonth;
 
@@ -47,6 +48,14 @@ public class StatusOrderReport {
         this.sumOfDeliveredOrdersForThisMonth = sumOfDeliveredOrdersForThisMonth;
     }
 
+    public Integer getSumOfAmountForDeliveredOrdersForThisMonth() {
+        return sumOfAmountForDeliveredOrdersForThisMonth;
+    }
+
+    public void setSumOfAmountForDeliveredOrdersForThisMonth(Integer sumOfAmountForDeliveredOrdersForThisMonth) {
+        this.sumOfAmountForDeliveredOrdersForThisMonth = sumOfAmountForDeliveredOrdersForThisMonth;
+    }
+
     public Integer getSumOfDeletedOrdersForThisMonth() {
         return sumOfDeletedOrdersForThisMonth;
     }
@@ -55,11 +64,11 @@ public class StatusOrderReport {
         this.sumOfDeletedOrdersForThisMonth = sumOfDeletedOrdersForThisMonth;
     }
 
-    public Integer getSumOfAmountDeletedOrdersForThisMonth() {
+    public Integer getSumOfAmountForDeletedOrdersForThisMonth() {
         return sumOfAmountDeletedOrdersForThisMonth;
     }
 
-    public void setSumOfAmountDeletedOrdersForThisMonth(Integer sumOfAmountDeletedOrdersForThisMonth) {
+    public void setSumOfAmountForDeletedOrdersForThisMonth(Integer sumOfAmountDeletedOrdersForThisMonth) {
         this.sumOfAmountDeletedOrdersForThisMonth = sumOfAmountDeletedOrdersForThisMonth;
     }
 
@@ -71,6 +80,7 @@ public class StatusOrderReport {
                 ", sumOfActiveOrdersForThisMonth=" + sumOfActiveOrdersForThisMonth +
                 ", sumOfAmountForActiveOrdersForThisMonth=" + sumOfAmountForActiveOrdersForThisMonth +
                 ", sumOfDeliveredOrdersForThisMonth=" + sumOfDeliveredOrdersForThisMonth +
+                ", sumOfAmountForDeliveredOrdersForThisMonth=" + sumOfAmountForDeliveredOrdersForThisMonth +
                 ", sumOfDeletedOrdersForThisMonth=" + sumOfDeletedOrdersForThisMonth +
                 ", sumOfAmountDeletedOrdersForThisMonth=" + sumOfAmountDeletedOrdersForThisMonth +
                 '}';
