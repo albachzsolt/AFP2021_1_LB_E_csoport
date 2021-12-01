@@ -1,5 +1,6 @@
 package webshop.statics;
 
+import org.springframework.stereotype.Service;
 import webshop.product.ProductDao;
 import webshop.user.UserDao;
 import webshop.order.OrderDao;
@@ -7,6 +8,7 @@ import webshop.order.OrderDao;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class StaticsService {
 
     private UserDao userDao;
