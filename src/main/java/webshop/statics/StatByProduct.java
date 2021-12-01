@@ -5,15 +5,15 @@ public class StatByProduct {
     private int month;
     private String productName;
     private int productPrice;
-    private int prodcutCounter;
+    private int productCounter;
     private int amount;
 
-    public StatByProduct(int year, int month, String productName, int productPrice, int prodcutCounter, int amount) {
+    public StatByProduct(int year, int month, String productName, int productPrice, int productCounter, int amount) {
         this.year = year;
         this.month = month;
         this.productName = productName;
         this.productPrice = productPrice;
-        this.prodcutCounter = prodcutCounter;
+        this.productCounter = productCounter;
         this.amount = amount;
     }
 
@@ -34,8 +34,8 @@ public class StatByProduct {
         return productPrice;
     }
 
-    public int getProdcutCounter() {
-        return prodcutCounter;
+    public int getProductCounter() {
+        return productCounter;
     }
 
     public int getAmount() {
