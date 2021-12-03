@@ -12,4 +12,12 @@ public class StatReportOne {
         this.statusOrderReportList = statusOrderReportList;
         this.statRowSummary = statRowSummary;
     }
+
+    public List<StatusOrderReport> getStatusOrderReportList() {
+        return statusOrderReportList;
+    }
+
+    public StatRowSummary getStatRowSummary() {
+        return statRowSummary;
+    }
 }
