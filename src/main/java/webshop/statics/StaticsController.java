@@ -24,4 +24,14 @@ public class StaticsController {
         List<StatusOrderReport> statusOrderReports = staticsService.doReportOne();
         return new StatReportOne(statusOrderReports, statRowSummary);
     }
+
+    @GetMapping("/reports/products")
+    public List<StatByProduct> getProductsReport() {
+        return staticsService.doReportTwo();
+    }
+
+    @GetMapping("/reports/reportone")
+    public List<StatusOrderReport> doReportOne() {
+        return staticsService.doReportOne();
+    }
 }
