@@ -1,7 +1,7 @@
 load();
 
 function load() {
-    var url = "/dashboard";
+    const url = "/dashboard";
     fetch(url)
         .then(function (response) {
         return response.json();
@@ -13,11 +13,12 @@ function load() {
 
 function showStatistics(jsonData) {
     document.getElementById("user").innerHTML = 'We have ' + jsonData.numOfUsers + ' registered users!';
-    var numberOfActiveProducts = jsonData.numOfActiveProducts;
-    var numberOfAllProducts = jsonData.numOfProducts;
-    var numberOfActiveOrders = jsonData.numOfActiveOrders;
-    var numberOfAllOrders = jsonData.numOfOrders;
-    var options = {responsive: true,
+    const numberOfActiveProducts = jsonData.numOfActiveProducts;
+    const numberOfAllProducts = jsonData.numOfProducts;
+    const numberOfActiveOrders = jsonData.numOfActiveOrders;
+    const numberOfAllOrders = jsonData.numOfOrders;
+    const options = {
+        responsive: true,
         maintainAspectRatio: false, fontStyle: 'Arial'
     };
 
