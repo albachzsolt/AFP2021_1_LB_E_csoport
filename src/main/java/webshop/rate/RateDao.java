@@ -59,4 +59,20 @@ public class RateDao {
                         "on ratings.product_id=products.id where products.id =? order by ratings.rating_time",
                 (rs, i) -> rs.getDouble(1), product.getId());
     }
+
+    public List<Rate> getRateForUserAndProduct(Rate rate) {
+        return jdbcTemplate.query("Select ratings.id, ratings.message, ratings.stars,ratings.rating_time, " +
+                        "ratings.product_id from ratings join products on ratings.product_id=products.id " +
+                        "where ratings.product_id =? and ratings.user_id =? order by ratings.rating_time",
+                (rs, rowNum) -> new Rate(rs.getLong(1), rs.getString(2), rs.getInt(3),
+                        rs.getDate(4).toLocalDate(), rate.getUser(), rate.getProduct()),
+                rate.getProduct().getId(), rate.getUser().getId());
+    }
+
+    public int updateRate(Rate rate) {
+        Date date = Date.valueOf(rate.getDate());
+        return jdbcTemplate.update("update ratings set stars = ?, message = ?, rating_time = ? " +
+                        "where ratings.product_id =? and ratings.user_id =?",
+                rate.getStars(), rate.getMessage(), date, rate.getProduct().getId(), rate.getUser().getId());
+    }
 }
