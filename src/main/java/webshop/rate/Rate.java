@@ -36,4 +36,40 @@ public class Rate {
         }
         return date;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public int getStars() {
+        return stars;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 }
