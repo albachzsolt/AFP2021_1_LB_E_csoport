@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import webshop.product.Product;
 import webshop.product.ProductDao;
+import webshop.user.User;
 import webshop.user.UserDao;
 
 import javax.sql.DataSource;
@@ -74,5 +75,19 @@ public class RateDao {
         return jdbcTemplate.update("update ratings set stars = ?, message = ?, rating_time = ? " +
                         "where ratings.product_id =? and ratings.user_id =?",
                 rate.getStars(), rate.getMessage(), date, rate.getProduct().getId(), rate.getUser().getId());
+    }
+
+    public int deleteRate(Product product , User user) {
+        return jdbcTemplate.update("delete from ratings  where product_id = ? and user_id=?", product.getId(),
+                user.getId());
+    }
+
+
+    public boolean orderedProductByUser(Product product, User user) {
+        int counter = jdbcTemplate.queryForObject("select count(*) from products join ordered_items " +
+                "on ordered_items.product_id=products.id join orders on orders.id=ordered_items.order_id join users " +
+                "on users.id=orders.user_id where users.id=? and products.id=? and orders.status='DELIVERED'",
+                (rs, i) -> rs.getInt(1), user.getId(), product.getId());
+        return counter > 0;
     }
 }
