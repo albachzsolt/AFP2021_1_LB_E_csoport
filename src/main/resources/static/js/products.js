@@ -160,3 +160,47 @@ function scrollFunction() {
 function topFunction() {
   document.documentElement.scrollTop = 0;
 }
+
+
+function showRecommendations(jsonData){
+var divMain = document.getElementById("main_div");
+
+var divRec = document.createElement('div');
+divRec.setAttribute('id',"recommends");
+divMain.appendChild(divRec);
+
+for(var i = 0; i < jsonData.length; i++){
+
+var divProd = document.createElement('div');
+divProd.setAttribute('class', 'recommend-product-div');
+
+var nameDiv = document.createElement('div');
+nameDiv.setAttribute('class', 'name-div-reco');
+nameDiv.innerHTML = jsonData[i].name;
+divProd.appendChild(nameDiv);
+
+var imgDiv = document.createElement('img');
+imgDiv.setAttribute('src', '/img/products/' + jsonData[i].address + '.jpg');
+imgDiv.setAttribute('alt', '');
+imgDiv.setAttribute('class', 'products_img_reco');
+
+var variant = jsonData[i].address;
+divProd.setAttribute("onclick", `window.location.href="product.html?address=${jsonData[i].address}"`);
+divProd.appendChild(imgDiv);
+
+divRec.appendChild(divProd);
+    }
+}
+
+
+
+unction fetchRecommendations(){
+ var url ="/api/product/recommend";
+        fetch(url)
+            .then(function(response) {
+                return response.json();
+                })
+            .then(function(jsonData) {
+                showRecommendations(jsonData);
+            });
+}
