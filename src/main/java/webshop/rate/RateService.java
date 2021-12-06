@@ -3,6 +3,10 @@ package webshop.rate;
 import org.springframework.stereotype.Service;
 import webshop.CustomResponseStatus;
 import webshop.Response;
+import webshop.product.Product;
+import webshop.user.User;
+
+import java.util.List;
 
 @Service
 public class RateService {
@@ -34,5 +38,21 @@ public class RateService {
         } else {
             return new CustomResponseStatus(Response.FAILED, "Rate is only possible after the order was delivered.");
         }
+    }
+
+    public List<Rate> getRatesForProduct(Product product){
+        return rateDao.getRatesForProduct(product);
+    }
+
+    public double getAvgRatesForProduct(Product product){
+        return rateDao.getAvgRatesForProduct(product);
+    }
+
+    public int deleteRate(Product product, User user){
+        return rateDao.deleteRate(product, user);
+    }
+
+    public boolean orderedProductByUser(Product product, User user) {
+        return rateDao.orderedProductByUser(product, user);
     }
 }
