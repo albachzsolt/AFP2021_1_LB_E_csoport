@@ -47,3 +47,13 @@ function fetchCategoryNames() {
       fetchedCategoryNames = jsonData;
     });
 }
+
+
+
+function showCategoryDivs(category) {
+  var allProductsDiv = document.querySelector('.all-products-div');
+  allProductsDiv.innerHTML = "";
+  var categoryArray = [];
+  categoryArray.push(category);
+  showDivs(categoryArray);
+}
