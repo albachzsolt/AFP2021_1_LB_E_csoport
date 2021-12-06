@@ -115,3 +115,31 @@ function showDivs(jsonData) {
        mainDiv.appendChild(clearerDiv);
 
 }
+
+
+function addFilterButtons(jsonData) {
+
+  var select = document.createElement("select");
+  select.setAttribute('class', 'select-category');
+
+  for (var i = 0; i < jsonData.length; i++) {
+
+    var option = document.createElement('option');
+    option.value = jsonData[i].categoryName;
+    option.innerHTML = jsonData[i].categoryName;
+    select.appendChild(option);
+  }
+
+select.onchange = function(){fetchCategory(document.querySelector(".select-category").value)};
+
+  var selectAllButton = document.createElement('button');
+  selectAllButton.innerHTML = 'Show All';
+  selectAllButton.setAttribute('class', 'select-all-button');
+  selectAllButton.addEventListener('click', function () {
+    showDivs(allProducts)
+  });
+
+var mainDiv = document.getElementById('main_div');
+mainDiv.prepend(selectAllButton);
+mainDiv.prepend(select);
+}
