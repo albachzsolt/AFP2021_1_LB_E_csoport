@@ -71,4 +71,23 @@ public class RateController {
         }
         return new CustomResponseStatus(Response.FAILED, "Please sign in to rate.");
     }
+
+    @DeleteMapping("/api/rating/delete/{productId}")
+    public CustomResponseStatus deleteRate(Authentication authentication, @PathVariable long productId) {
+        if (authentication != null) {
+            String loggedInUsername = authentication.getName();
+            User loggedInUser = userService.getUserByUsername(loggedInUsername);
+            Product product = productService.getProductByProductId(productId);
+            int sqlResponse = rateService.deleteRate(product, loggedInUser);
+            if (sqlResponse == 0) {
+                return new CustomResponseStatus(Response.SUCCESS, "You have no review.");
+            }
+            else {
+                return new CustomResponseStatus(Response.SUCCESS, "Your review has been deleted.");
+            }
+        }
+        else {
+            return new CustomResponseStatus(Response.FAILED, "Please sign in to delete your review.");
+        }
+    }
 }
