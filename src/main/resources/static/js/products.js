@@ -20,3 +20,19 @@ function fetchProducts() {
       addFilterButtons(fetchedCategoryNames);
     });
 }
+
+
+function fetchCategory(categoryName) {
+  var categoryUrl = categoryName.replace(/ /g, '_');
+
+  var url = "/api/category/" + categoryUrl;
+  fetch(url)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (jsonData) {
+      var allProductsDiv = document.querySelector('.all-products-div');
+      allProductsDiv.innerHTML = '';
+      showCategoryDivs(jsonData);
+    });
+}
