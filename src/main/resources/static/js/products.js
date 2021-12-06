@@ -36,3 +36,14 @@ function fetchCategory(categoryName) {
       showCategoryDivs(jsonData);
     });
 }
+
+function fetchCategoryNames() {
+  var url = "/api/categories";
+  fetch(url)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (jsonData) {
+      fetchedCategoryNames = jsonData;
+    });
+}
