@@ -72,12 +72,12 @@ public class RateController {
         return new CustomResponseStatus(Response.FAILED, "Please sign in to rate.");
     }
 
-    @DeleteMapping("/api/rating/delete/{productId}")
-    public CustomResponseStatus deleteRate(Authentication authentication, @PathVariable long productId) {
+    @DeleteMapping("/api/rating/delete/{productid}")
+    public CustomResponseStatus deleteRate(Authentication authentication, @PathVariable long productid) {
         if (authentication != null) {
             String loggedInUsername = authentication.getName();
             User loggedInUser = userService.getUserByUsername(loggedInUsername);
-            Product product = productService.getProductByProductId(productId);
+            Product product = productService.getProductByProductId(productid);
             int sqlResponse = rateService.deleteRate(product, loggedInUser);
             if (sqlResponse == 0) {
                 return new CustomResponseStatus(Response.SUCCESS, "You have no review.");
@@ -89,5 +89,23 @@ public class RateController {
         else {
             return new CustomResponseStatus(Response.FAILED, "Please sign in to delete your review.");
         }
+    }
+
+    @GetMapping("/api/rating/control/{productid}")
+    public CustomResponseStatus canUserRateProduct(Authentication authentication, @PathVariable long productid) {
+        if (authentication != null) {
+            String loggedInUsername = authentication.getName();
+            User loggedInUser = userService.getUserByUsername(loggedInUsername);
+            Product product = productService.getProductByProductId(productid);
+            boolean control = rateService.orderedProductByUser(product, loggedInUser);
+            if (control) {
+                return  new CustomResponseStatus(Response.FAILED, "Your rate is successful.");
+            }
+            else {
+                return new CustomResponseStatus(Response.FAILED, "You have to shop from this product " +
+                        "before you rate.");
+            }
+        }
+        return new CustomResponseStatus(Response.FAILED, "Please sign in to rate.");
     }
 }
