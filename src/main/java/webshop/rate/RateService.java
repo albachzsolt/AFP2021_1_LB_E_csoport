@@ -21,7 +21,7 @@ public class RateService {
 
     }
 
-    public CustomResponseStatus addRate(Rate rate){
+    public CustomResponseStatus addRate(Rate rate) {
         rate.setMessage(deleteHTMLelements(rate.getMessage()));
         if (rateDao.orderedProductByUser(rate.getProduct(),rate.getUser())) {
             if (!rateDao.getRateForUserAndProduct(rate).isEmpty()) {
@@ -36,19 +36,28 @@ public class RateService {
             }
             return new CustomResponseStatus(Response.FAILED, "Failed to rate!");
         } else {
-            return new CustomResponseStatus(Response.FAILED, "Rate is only possible after the order was delivered.");
+            return new CustomResponseStatus(Response.FAILED, "Rate is only possible after the order was " +
+                    "delivered.");
         }
     }
 
-    public List<Rate> getRatesForProduct(Product product){
+    public List<Rate> getRatesForProduct(Product product) {
         return rateDao.getRatesForProduct(product);
     }
 
-    public double getAvgRatesForProduct(Product product){
+    public double getAvgRatesForProduct(Product product) {
         return rateDao.getAvgRatesForProduct(product);
     }
 
-    public int deleteRate(Product product, User user){
+    public Rate getRateForUserAndProduct(Rate rate) {
+        List<Rate> ratingList = rateDao.getRateForUserAndProduct(rate);
+        if (!ratingList.isEmpty()) {
+            return ratingList.get(0);
+        }
+        throw new IllegalArgumentException("The Rate does not exist!");
+    }
+
+    public int deleteRate(Product product, User user) {
         return rateDao.deleteRate(product, user);
     }
 
