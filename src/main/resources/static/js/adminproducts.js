@@ -146,3 +146,40 @@ function deleteItem() {
     });
     return false;
 }
+
+function editItem(jsonData, id){
+    var attribute = '.save-button' + id;
+    var saveBtn = document.querySelector(attribute);
+    var newClassName = 'save-button' + id;
+    var newAttribute = 'button-enabled button ' + newClassName;
+
+    saveBtn.setAttribute('class', newAttribute);
+
+    var row = document.getElementById(id);
+    var c = row.childNodes;
+
+    var select = document.createElement('select');
+    select.setAttribute('class', 'select-element-category');
+    c[6].appendChild(select);
+
+    for (var i = 0; i < c.length; i++){
+        if (i == 5){
+            c[i].innerHTML = `<select class="select-element">
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="DELETED">DELETED</option>
+            </select>`
+        }
+        if (i == 6){
+        c[i].innerHTML = "";
+        for (var j = 0; j < jsonData.length; j++){
+            var option = document.createElement('option');
+            option.innerHTML = jsonData[j].categoryName;
+            select.appendChild(option)
+        }
+        c[6].appendChild(select);
+        }
+        else {
+        c[i].setAttribute('contenteditable', 'true');
+                }
+        }
+}
