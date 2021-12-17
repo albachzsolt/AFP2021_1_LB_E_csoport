@@ -183,3 +183,178 @@ function editItem(jsonData, id){
                 }
         }
 }
+
+function saveUpdatedItem(){
+      var row = document.getElementById(this.id);
+      var childenOfRow = row.children;
+      var id = this.id;
+
+      var code = childenOfRow[0].innerHTML;
+      var name = childenOfRow[1].innerHTML;
+      var address = childenOfRow[2].innerHTML;
+      var manufacturer = childenOfRow[3].innerHTML;
+      var price = childenOfRow[4].innerHTML.split(" ");
+
+      var selectElement = document.querySelector('.select-element');
+      var value = selectElement.options[selectElement.selectedIndex].value;
+
+      var selectElementCategory = document.querySelector('.select-element-category');
+      var valueCategory = selectElementCategory.options[selectElementCategory.selectedIndex].value;
+
+      price = price[0];
+
+      var request = {
+        'categoryName' : valueCategory,
+        'products': [{
+                'code': code,
+                'name': name,
+                'address': address,
+                'manufacturer': manufacturer,
+                'price': price,
+                'productStatus': value
+        }]
+      };
+      fetch('/api/product/' + id, {
+            method: 'POST',
+            body: JSON.stringify(request),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
+        .then(function (response) {
+            return response.json();
+            })
+        .then(function(jsonData){
+            if (jsonData.response == 'SUCCESS'){
+            fetchProducts();
+            document.getElementById('message-div').innerHTML = 'Updated!';
+            document.getElementById('message-div').setAttribute('class', 'alert alert-success')
+
+                        var row = document.getElementById(id);
+                            var c = row.childNodes;
+                            for (var i = 0; i < c.length; i++){
+                                if (i == 5){
+                                    c[i].innerHTML = `<div>$value</div>`
+                                }
+                                else {
+                                c[i].setAttribute('contenteditable', 'false');
+                                }
+                                }
+
+            var classAttribute = '.save-button' + id;
+            var newClassName = 'save-button' + id;
+            var newAttribute = 'button-disabled button ' + newClassName;
+            document.querySelector(classAttribute).setAttribute('class', newAttribute);
+            } else{
+            fetchProducts();
+            document.getElementById('message-div').innerHTML = jsonData.message;
+            document.getElementById('message-div').setAttribute('class', 'alert alert-danger')
+
+            var row = document.getElementById(id);
+                var c = row.childNodes;
+                for (var i = 0; i < c.length; i++){
+                    if (i == 5){
+                        c[i].innerHTML = `<div>$value</div>`
+                    }
+                    else {
+                    c[i].setAttribute('contenteditable', 'false');
+                    }
+                    }
+            var classAttribute = '.save-button' + id;
+            var newClassName = 'save-button' + id;
+            var newAttribute = 'button-disabled button ' + newClassName;
+            document.querySelector(classAttribute).setAttribute('class', newAttribute);
+                }
+            })
+        return false;
+}
+
+
+function addNewProduct() {
+  var codeInput = document.getElementById('code').value;
+  var nameInput = document.getElementById('name').value;
+  var manufacturerInput = document.getElementById('manufacturer').value;
+  var priceInput = document.getElementById('price').value;
+  var categoryInput = document.getElementById('select-category');
+
+  var valueSelectCategory = categoryInput.options[categoryInput.selectedIndex].value;
+
+  var request = {
+    'categoryName': valueSelectCategory,
+    'products': [{
+        'code': codeInput,
+        'name': nameInput,
+        'manufacturer': manufacturerInput,
+        'price': priceInput
+    }]
+  };
+
+  fetch('/api/products', {
+    method: 'POST',
+    body: JSON.stringify(request),
+    headers: {
+      'Content-type': 'application/json'
+    }
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (jsonData) {
+      if (jsonData.response == 'SUCCESS') {
+        document.getElementById('code').value = '';
+        document.getElementById('name').value = '';
+        document.getElementById('manufacturer').value = '';
+        document.getElementById('price').value = '';
+        fetchProducts();
+        document.getElementById('message-div').innerHTML = jsonData.message;
+        document.getElementById('message-div').setAttribute('class', 'alert alert-success');
+      } else {
+        document.getElementById('message-div').innerHTML = jsonData.message;
+        document.getElementById('message-div').setAttribute('class', 'alert alert-danger');
+      }
+    });
+  return false;
+}
+
+var newProductButton = document.getElementById('new-product-btn');
+newProductButton.onclick = function () {
+  modify = false;
+  fetchCategories();
+};
+
+function showInputFields(jsonData) {
+
+  var select = document.getElementById('select-category');
+
+  for (var i = 0; i < jsonData.length; i++){
+        var option = document.createElement('option');
+        option.innerHTML = jsonData[i].categoryName;
+        select.appendChild(option);
+  }
+
+
+  var mainDiv = document.querySelector('#main_div_adminproducts');
+  var formInput = document.querySelector('#form-input');
+  if (formInput.getAttribute('class') == 'disabled'){
+  formInput.setAttribute('class', 'enabled');
+  mainDiv.setAttribute('class', 'main_div_adminproducts_modified')
+  } else {
+  formInput.setAttribute('class', 'disabled')
+  mainDiv.setAttribute('class', 'main_div_adminproducts')
+  }
+}
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+
+
+function topFunction() {
+  document.documentElement.scrollTop = 0;
+}
