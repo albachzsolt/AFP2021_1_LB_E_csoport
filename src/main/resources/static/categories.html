@@ -1,8 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
     <meta charset="UTF-8">
     <title>Categories</title>
+    <script src="js/sortable/jquery-1.11.3.js"></script>
+    <script src="js/sortable/jquery-ui.js"></script>
+    <link rel="stylesheet" href="css/jSortable.css">
+    <link rel="stylesheet" href="css/categories.css">
+    <style>
+        body {
+            font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
+            font-size: 62.5%;
+        }
+        .handle {
+            font-size: 40px;
+            cursor:-webkit-grab;
+        }
+        label{
+            font-size: 30px;
+        }
+    </style>
 </head>
 <body>
     <div class="category-main-div">
@@ -26,6 +43,8 @@
 
         <button class="category-button" onclick="save()">Save</button>
     </div>
+    <script src="js/menu2.js"></script>
     <script src="js/categories.js"></script>
+    <script src="js/sortable/jSortable.js"></script>
 </body>
 </html>

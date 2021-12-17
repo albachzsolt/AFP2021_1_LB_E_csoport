@@ -26,6 +26,11 @@ function showCategories(jsonData) {
     }
 }
 
+$('.sortable').sortable();
+$('.sortable').sortable({
+    handle: '.handle'
+});
+
 function save() {
     var request = [];
     var lis = document.getElementById('sortable').getElementsByTagName('li');
@@ -49,7 +54,6 @@ function save() {
             getCategories();
         });
 }
-
 
 function deleteCategory() {
     var id = this.event.target.id
