@@ -235,3 +235,151 @@ function addToBasket(jsonData) {
     });
 }
 
+function goBack() {
+  window.history.back();
+}
+
+function showProductNotFound() {
+  window.location.href = 'http://localhost:8080/error.html';
+}
+
+function displayAvg(jsonData) {
+  document.getElementById('avg_product').innerHTML = "Average rating: " + jsonData;
+}
+
+function showRates() {
+  var div = document.getElementById('rating-div');
+  div.innerHTML = "";
+  for (var i = 0; i < actRates.length; i++) {
+
+    var reviewDiv = document.createElement("div");
+    reviewDiv.setAttribute('class', 'review-div')
+
+    var numberOfRate = document.createElement("div");
+    numberOfRate.className = "stars";
+
+    var starForm = document.createElement("form");
+    starForm.setAttribute("action", "");
+
+    for (var j = 5; j > 0; j--) {
+      if (j != actRates[i]["stars"]) {
+        starForm.innerHTML += `
+        <input class="starView starView-${j}" id="star-${j}" type="radio" name="star" disabled="disabled"/>
+        <label class="starView starView-${j}" for="star-${j}"></label>`;
+      } else {
+        starForm.innerHTML += `
+        <input class="starView starView-${j}" id="star-${j}" type="radio" name="star" disabled="disabled" checked="true"/>
+        <label class="starView starView-${j}" for="star-${j}"></label>`;
+      }
+    }
+
+    numberOfRate.appendChild(starForm);
+    reviewDiv.appendChild(numberOfRate);
+
+    var reviewDate = document.createElement('div');
+    reviewDate.setAttribute('class', 'rate-date');
+    reviewDate.innerHTML = actRates[i]["date"];
+    reviewDiv.appendChild(reviewDate);
+
+    var reviewComment = document.createElement('div');
+    reviewComment.setAttribute('class', 'rate-comment');
+    reviewComment.innerHTML = actRates[i]["message"];
+    reviewDiv.appendChild(reviewComment);
+
+    var reviewName = document.createElement('div');
+    reviewName.setAttribute('class', 'rate-name');
+    reviewName.innerHTML = actRates[i]["user"]["username"];
+    reviewDiv.appendChild(reviewName);
+
+    div.appendChild(reviewDiv);
+  }
+}
+
+function createRatingDiv(jsonData) {
+  var tdRight = document.querySelector('.td-right');
+
+  var collectorChecker = document.getElementById('collector');
+  if (tdRight.contains(collectorChecker)) {
+    tdRight.removeChild(collectorChecker);
+  }
+
+  var collector = document.createElement('div');
+  collector.id = 'collector';
+  tdRight.appendChild(collector);
+
+  var starDiv = document.createElement('div');
+  starDiv.setAttribute('class', 'rating-div-main');
+  starDiv.setAttribute('id', 'star');
+  collector.appendChild(starDiv);
+
+  var divForStars = document.createElement("div");
+  divForStars.className = "stars";
+
+  var starForm = document.createElement("form");
+  starForm.id = "formId";
+  starForm.setAttribute("action", "");
+
+  for (var i = 5; i > 0; i--) {
+    starForm.innerHTML += `<input class="star-rating star star-${i}" id="star-${i}" type="radio" name="star"/>
+      <label class="star star-${i}" for="star-${i}"></label>`;
+  }
+
+  divForStars.appendChild(starForm);
+  collector.appendChild(divForStars);
+
+  var ratingMessage = document.createElement('div');
+  ratingMessage.setAttribute('class', 'rating-message');
+  ratingMessage.setAttribute('id', 'message');
+  collector.appendChild(ratingMessage);
+
+  var textArea = document.createElement('textarea');
+  textArea.setAttribute('id', 'message_text');
+  textArea.setAttribute('rows', '2');
+  textArea.setAttribute('cols', '40');
+  ratingMessage.appendChild(textArea);
+
+  var ratingButtonDiv = document.createElement('div');
+  ratingButtonDiv.setAttribute('id', 'button');
+  collector.appendChild(ratingButtonDiv);
+
+  var ratingButton = document.createElement('button');
+  ratingButton.setAttribute('class', 'rating-button');
+  ratingButton.setAttribute('id', 'rate_button');
+  ratingButton.innerHTML = 'Rate';
+  ratingButtonDiv.appendChild(ratingButton);
+
+  var deleteButton = document.createElement('button');
+  deleteButton.setAttribute('class', 'delete-rate');
+  deleteButton.setAttribute('id', 'delete-rate');
+  deleteButton.innerHTML = 'Delete my rate';
+  ratingButtonDiv.appendChild(deleteButton);
+
+  document.querySelector('#rate_button').addEventListener('click', function () {
+    sendRate(jsonData);
+  });
+
+  document.querySelector('#delete-rate').addEventListener('click', function () {
+    deleteRate();
+  });
+}
+
+function deleteRate() {
+  fetchRates();
+  fetch('/api/rating/delete/' + actProduct["products"][0]["id"], {
+      method: "DELETE"
+    })
+    .then(function (response) {
+      return response.json();
+    }).then(function (jsonData) {
+      if (jsonData.response === 'SUCCESS') {
+        if (!confirm("Are you sure to delete your review?")) {
+          return;
+        }
+        document.getElementById('message-div').setAttribute('class', 'alert alert-success');
+      } else {
+        document.getElementById('message-div').setAttribute('class', 'alert alert-danger');
+      }
+      document.getElementById('message-div').innerHTML = jsonData.message;
+      fetchRates();
+    });
+}
