@@ -35,3 +35,114 @@ function fetchRates() {
     });
   return false;
 }
+
+function showRatesForUserIfExists() {
+  var url = "/api/rating/" + actProduct["products"][0]["id"]
+  fetch(url)
+    .then(response => response.json())
+    .then(jsonData => fillRate(jsonData))
+}
+
+function fillRate(jsonData) {
+  createRatingDiv();
+  var keys = Object.keys(jsonData);
+  if (jsonData[keys[0]].response === "SUCCESS") {
+    var stars = jsonData[keys[1]].stars;
+    var message = jsonData[keys[1]].message;
+    document.querySelector("#formId #star-" + stars).setAttribute("checked", "true");
+    document.getElementById("message_text").value = message;
+  }
+}
+
+function showTable(jsonData) {
+  var table = document.getElementById("product-table");
+
+  var tbody = document.createElement('tbody');
+  tbody.setAttribute('class', 'product-body');
+  table.appendChild(tbody);
+
+  var trDetail = document.createElement('tr');
+  tbody.appendChild(trDetail);
+
+  var tdLeft = document.createElement('td');
+  trDetail.appendChild(tdLeft);
+  tdLeft.setAttribute('class', 'td-left');
+
+  var link = document.createElement('div');
+  link.addEventListener('click', goBack);
+  link.innerHTML = 'Back to main menu';
+  link.setAttribute('class', 'product-category link');
+  tdLeft.appendChild(link);
+
+  var categoryDiv = document.createElement('div');
+  categoryDiv.innerText = jsonData.categoryName;
+  categoryDiv.setAttribute('class', 'product-category');
+  tdLeft.appendChild(categoryDiv);
+
+  var span = document.createElement('span');
+  span.innerHTML = ' / ' + jsonData.products[0].name;
+  categoryDiv.appendChild(span);
+
+  var productImg = document.createElement('img');
+  productImg.setAttribute('class', 'product-img')
+  productImg.setAttribute('src', '/img/products/' + jsonData.products[0].address + '.jpg')
+  productImg.setAttribute('alt', '');
+  tdLeft.appendChild(productImg);
+
+  var tdRight = document.createElement('td');
+  tdRight.setAttribute('class', 'td-right')
+  trDetail.appendChild(tdRight);
+
+  var inputField = document.createElement('input');
+  inputField.setAttribute('class', 'purchase-quantity');
+  inputField.setAttribute('type', 'number');
+  inputField.setAttribute('name', 'quantity');
+  inputField.setAttribute('id', 'quantity');
+  inputField.setAttribute('min', '1');
+  inputField.setAttribute('value', '1');
+  tdRight.appendChild(inputField);
+
+  var button = document.createElement('button');
+  button.setAttribute('class', 'purchase add-to-cart');
+  button.setAttribute('id', 'purchase');
+  button.innerHTML = 'Add to cart';
+  tdRight.appendChild(button);
+
+  var nameDiv = document.createElement('div');
+  nameDiv.innerText = jsonData.products[0].name;
+  nameDiv.setAttribute('class', 'product-name');
+  tdRight.appendChild(nameDiv);
+
+  var avgDiv = document.createElement('div');
+  avgDiv.setAttribute('class', 'avg');
+  avgDiv.setAttribute('id', 'avg_product');
+  tdRight.appendChild(avgDiv);
+
+  var categoryDiv2 = document.createElement('div');
+  categoryDiv2.innerText = jsonData.categoryName;
+  categoryDiv2.setAttribute('class', 'category');
+  tdRight.appendChild(categoryDiv2);
+
+  var manufacturerDiv = document.createElement('div');
+  manufacturerDiv.setAttribute('class', 'product-man');
+  manufacturerDiv.innerText = 'by ' + jsonData.products[0].manufacturer;
+  tdRight.appendChild(manufacturerDiv);
+
+  var codeDiv = document.createElement('div');
+  codeDiv.setAttribute('class', 'product-code');
+  codeDiv.innerText = jsonData.products[0].code;
+  tdRight.appendChild(codeDiv);
+
+  var priceDiv = document.createElement('div');
+  priceDiv.setAttribute('class', 'product-price');
+  priceDiv.innerText = jsonData.products[0].price + ' Ft';
+  tdRight.appendChild(priceDiv);
+
+  document.querySelector('#purchase').addEventListener('click', function () {
+    addToBasket(jsonData);
+  });
+
+  createRatingDiv(jsonData);
+
+  fetchRates(jsonData);
+}
