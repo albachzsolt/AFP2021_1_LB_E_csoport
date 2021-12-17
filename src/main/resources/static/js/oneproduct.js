@@ -146,3 +146,62 @@ function showTable(jsonData) {
 
   fetchRates(jsonData);
 }
+
+function sendRate() {
+  var numOfStars = 0;
+  var stars = document.getElementById('formId').getElementsByTagName('input');
+  for (let i = 0; i < stars.length; i++) {
+    if (stars[i]["checked"]) {
+      numOfStars = 5 - (i);
+      break;
+    }
+  }
+  if (numOfStars > 0) {
+    var message = document.getElementById('message_text').value;
+    var request = {
+      'id': actProduct["id"],
+      'stars': numOfStars,
+      'message': message,
+      'date': null,
+      'user': null,
+      'product': actProduct["products"][0]
+    };
+
+    fetch('/api/rating/userrating/' + actProduct["products"][0]["id"], {
+        method: 'POST',
+        body: JSON.stringify(request),
+        headers: {
+          'Content-type': 'application/json'
+        }
+      })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (jsonData) {
+        if (jsonData.response === "SUCCESS") {
+          document.getElementById('message-div').setAttribute('class', 'alert alert-success');
+          fetchRates();
+        } else {
+          document.getElementById('message-div').setAttribute('class', 'alert alert-danger');
+        }
+        document.getElementById('message-div').innerHTML = jsonData.message;
+      })
+    document.getElementById('message_text').value = "";
+  } else {
+    document.getElementById('message-div').setAttribute('class', 'alert alert-danger');
+    document.getElementById('message-div').innerHTML = "Please select from the stars before rate!";
+  }
+}
+
+function fetchAvg() {
+  var url = "/api/rating/avg/" + actProduct["products"][0]["id"];
+  fetch(url)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (jsonData) {
+      displayAvg(jsonData);
+    });
+  return false;
+
+}
