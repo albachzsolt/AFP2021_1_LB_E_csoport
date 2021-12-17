@@ -205,3 +205,33 @@ function fetchAvg() {
   return false;
 
 }
+
+function addToBasket(jsonData) {
+  var quantity = document.getElementById('quantity').value;
+  var code = jsonData.products[0].code;
+  var request = {
+    'productCode': code,
+    'productPieces': quantity
+  };
+  fetch('/basket', {
+      method: 'POST',
+      body: JSON.stringify(request),
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
+    .then(function (response) {
+      return response.json();
+    }).then(function (jsonData) {
+      if (jsonData.response === "SUCCESS") {
+        document.getElementById('message-div').setAttribute('class', 'alert alert-success');
+      } else {
+        document.getElementById('message-div').setAttribute('class', 'alert alert-danger');
+      }
+      document.getElementById('message-div').innerHTML = jsonData.message;
+    })
+    .then(function () {
+      fetchRates();
+    });
+}
+
