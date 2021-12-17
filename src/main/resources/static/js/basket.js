@@ -132,3 +132,47 @@ function showBasket(jsonData) {
 
   fetchFormerShippingAddressList();
 }
+
+
+function clearBasket() {
+  if (!confirm('Are you sure to empty your basket?')) {
+    return;
+  }
+  fetch('/basket', {
+      method: 'DELETE'
+    })
+    .then(function (response) {
+      return response.json();
+    }).then(function (jsonData) {
+      if (jsonData.response === 'SUCCESS') {
+        document.getElementById('message-div').setAttribute('class', 'alert alert-success');
+      } else {
+        document.getElementById('message-div').setAttribute('class', 'alert alert-danger');
+      }
+      document.getElementById('message-div').innerHTML = jsonData.message;
+      fetchBasket();
+    });
+}
+
+function deleteFromBasket() {
+  var id = this["raw-data"].product.id;
+
+  if (!confirm("Are you sure to delete?")) {
+    return;
+  }
+
+  fetch("/basketitem/" + id, {
+      method: "DELETE"
+    })
+    .then(function (response) {
+      return response.json();
+    }).then(function (jsonData) {
+      if (jsonData.response === 'SUCCESS') {
+        document.getElementById('message-div').setAttribute('class', 'alert alert-success');
+      } else {
+        document.getElementById('message-div').setAttribute('class', 'alert alert-danger');
+      }
+      document.getElementById('message-div').innerHTML = jsonData.message;
+      fetchBasket();
+    });
+}
