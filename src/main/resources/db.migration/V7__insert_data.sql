@@ -69,3 +69,22 @@ INSERT INTO ordered_items (order_id, product_id, order_price, quantity) VALUES
     (10, 1, 3190, 1),
     (10, 3, 9990, 2);
 
+INSERT INTO ratings (user_id, product_id, stars, message, rating_time) VALUES
+    (2, 2, 5, 'I love using my coconut bowls, makes my food taste much better!)', '2021-12-09 09:02:33'),
+    (2, 4, 5, 'I love using my coconut bowls, makes my food taste much better!)', '2021-12-09 09:02:33'),
+    (2, 17, 5, 'Very nice and stylish product! And a quick delivery! ;)', '2021-12-09 09:02:33'),
+    (2, 19, 5, 'Awesome!! Love it!!', '2021-12-09 09:02:33'),
+    (2, 10, 5, 'Amazing product!!', '2021-12-09 09:02:33'),
+    (2, 16, 5, 'Love this product! Will recommend it to my friends!!', '2021-12-09 09:02:33'),
+    (2, 5, 5, 'I am so happy with my product!', '2021-12-09 09:02:33'),
+    (2, 7, 5, 'I love my new product !! Cute and eco-friendly', '2021-12-09 09:02:33'),
+    (2, 9, 5, 'So happy that this company exists!!! Perfect gift for my husband!', '2021-12-09 09:02:33'),
+    (2, 13, 5, 'Very nice and stylish product! And a quick delivery! ;)', '2021-12-09 09:02:33'),
+    (2, 14, 5, 'Modern, reusable and non-toxic. Love it!', '2021-12-09 09:02:33'),
+    (2, 15, 5, 'I love my new product !! Cute and eco-friendly', '2021-12-09 09:02:33'),
+    (2, 10, 5, 'Very nice and stylish product! And a quick delivery! ;)', '2021-12-09 09:02:33'),
+    (2, 6, 5, 'So happy that this company exists!!! Perfect gift for my husband!', '2021-12-09 09:02:33'),
+    (2, 8, 5, 'So happy that this company exists!!! Perfect gift for my husband!', '2021-12-09 09:02:33'),
+    (2, 21, 5, 'So happy that this company exists!!! Perfect gift for my husband!', '2021-12-09 09:02:33'),
+    (2, 1, 5, 'I love using my coconut bowls, makes my food taste much better:)', '2021-12-09 09:02:33'),
+    (2, 3, 5, 'I love using my coconut bowls, makes my food taste much better:)', '2021-12-09 09:02:33');
