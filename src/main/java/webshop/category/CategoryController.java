@@ -13,6 +13,9 @@ public class CategoryController {
 
     private CategoryValidator categoryValidator = new CategoryValidator();
 
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @GetMapping("/api/products")
     public List<Category> listAllProducts(){
