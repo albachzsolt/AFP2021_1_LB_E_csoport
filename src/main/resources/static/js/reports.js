@@ -1,4 +1,5 @@
 fetchReports();
+fetchReportsTwo();
 
 
 function fetchReports() {
@@ -9,6 +10,17 @@ function fetchReports() {
         })
         .then(function (jsonData) {
             showTables(jsonData);
+        });
+}
+
+function fetchReportsTwo() {
+    var url = "/reports/products";
+    fetch(url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (jsonData) {
+            showTables2(jsonData);
         });
 }
 

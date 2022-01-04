@@ -5,7 +5,7 @@ var footer = document.createElement('footer');
 footer.setAttribute('class', 'footer')
 
 var div = document.createElement('div');
-div.setAttribute = ('class', 'footer');
+div.setAttribute('class', 'footer');
 
 var b = document.createElement('b');
 b.innerHTML = 'GREENHUB © 2019 All rights reserved';
