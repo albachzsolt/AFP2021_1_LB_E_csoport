@@ -194,7 +194,7 @@ divRec.appendChild(divProd);
 
 
 
-unction fetchRecommendations(){
+function fetchRecommendations(){
  var url ="/api/product/recommend";
         fetch(url)
             .then(function(response) {
