@@ -94,6 +94,7 @@ Az admin jogosult a felhasználók kezelésére, törlésére. Rendelés állapo
 
 Ki kell találnunk azt, amit látni szeretnénk a weblap oldalain, meg kell határozni a színeket, elemeket, képeket, animációkat etc. 
 Figyelni kell rá, hogy a tartalomhoz harmonikusan illeszkedjen a megjelenés, messzemenően ügyelve a funkcionalitásra, hiszen egy webshopról van szó, amelyben a használhatóság rendkívül jelentős tényező. 
+Képernyőterv: https://github.com/albachzsolt/AFP2021_1_LB_E_csoport/blob/main/wepshopplan.jpg
 
 
 ### 9. Forgatókönyvek
