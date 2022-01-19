@@ -84,22 +84,19 @@ A fentiek alapján a fontosabb szempontok a következők:
 6.2. "Admin" felhasználói felület:
 
 
-
-
 ### 7. Használati esetek
 
 A felhasználó jogosult a termékek kosárba tételére, címének hozzáadására, rendelése állapotának megfigyelésére. Illetve értékelni tudja a megvásárolt terméket, a kézhezkapás után.
 Az admin jogosult a felhasználók kezelésére, törlésére. Rendelés állapotának módosítására. Termékek hozzáadására, eltávolítására. Vevői értékelések megtekintésre.
 
-### 8. Megfeleltetés
 
-
-### 9. Képernyő tervek
+### 8. Képernyő tervek
 
 Ki kell találnunk azt, amit látni szeretnénk a weblap oldalain, meg kell határozni a színeket, elemeket, képeket, animációkat etc. 
 Figyelni kell rá, hogy a tartalomhoz harmonikusan illeszkedjen a megjelenés, messzemenően ügyelve a funkcionalitásra, hiszen egy webshopról van szó, amelyben a használhatóság rendkívül jelentős tényező. 
 
-### 10. Forgatókönyvek
+
+### 9. Forgatókönyvek
 
 Mint ahogyan egy film esetében, a weblapnál is azt írja le a forgatókönyv, hogy mikor, mi történhet. 
 A szereplők itt a nyomógombok, a jelenetek a lapok. 
@@ -113,4 +110,3 @@ A megrendelés lépéseinél végig egyszerű űrlapok és szövegek jelenek meg
 Regisztráció: egy egyszerű űrlap áll a rendelkezésre. 
 
 
-### 11. Funkció-követelmény megfeleltetés
