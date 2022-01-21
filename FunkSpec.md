@@ -78,7 +78,12 @@ A fentiek alapján a fontosabb szempontok a következők:
 
 ### 6. Követelménylista 
 
-
+ID         Név          Verzió                          Kifejtés
+K1     Regisztráció       1.0        A felhasználó Név, Felhasználónév, Jelszó megadásával tudjon regisztrálni az oldalra.
+K2      Beléptetés        1.0        A felhasználó a korábban megadott felhasználónév és jelszó használatával tudjon belépni az oldalra.
+K3      Vásárlás          1.0        A felhasználó beléptetés után a kosarához adott termékeket, címének megadása után tudja megvásárolni.
+K4      Értékelés         1.0        A felhasználó készhezvételt követően véleményt, értékelést adhat le a termékről.
+K5    Adatmódosítás       1.0        A felhasználó a megadott adatait (név, jelszó) tudja módosítani.
 
 ### 7. Használati esetek
 
