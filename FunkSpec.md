@@ -78,12 +78,16 @@ A fentiek alapján a fontosabb szempontok a következők:
 
 ### 6. Követelménylista 
 
-ID         Név          Verzió                          Kifejtés
-K1     Regisztráció       1.0        A felhasználó Név, Felhasználónév, Jelszó megadásával tudjon regisztrálni az oldalra.
-K2      Beléptetés        1.0        A felhasználó a korábban megadott felhasználónév és jelszó használatával tudjon belépni az oldalra.
-K3      Vásárlás          1.0        A felhasználó beléptetés után a kosarához adott termékeket, címének megadása után tudja megvásárolni.
-K4      Értékelés         1.0        A felhasználó készhezvételt követően véleményt, értékelést adhat le a termékről.
-K5    Adatmódosítás       1.0        A felhasználó a megadott adatait (név, jelszó) tudja módosítani.
+ID|Verzió|Név|Kifejtés
+--|------|---|--------
+K01|V1.0|Termékek adminisztrációja|Termékek regisztrálása, törlése az igényelt üzleti folyamatokban leírtak szerint.
+K02|V1.0|Vásárlás adminisztrációja|Vásárlások folyamatának kezelése az igényelt üzleti folyamatokban leírtak szerint.
+K03|V1.0|Felhasználói fiókok kezelése|Bejelentkezés, felhasználói adatok módosítása, adminok és felhasználók rögzítése az adatbázisban, listák és kimutatások készítése az igényelt üzleti folyamatokban leírtak szerint.
+K04|V1.0|Egyszerűen használható kezelőfelület|Az ismertebb böngészőkből használható felhasználói felület megvalósítása, amely mindenki számára a lehető legegyszerűbb átállást eredményezi.
+K05|V1.0|Platformfüggetlen működés|Régóta használatos, operációs rendszertől független technológiák használata: Java, HTML/CSS/JavaScript, MySQL.
+K06|V1.0|Költséghatékony üzemeltetés|A szabványos és elterjedt technológiák használata biztosítja.
+K07|V1.0|Bővíthetőség|A termékek, valamint a felhasználók számának bővíthetősége, illetve új funkciók utólagos hozzáadásának biztosítása.
+
 
 ### 7. Használati esetek
 
