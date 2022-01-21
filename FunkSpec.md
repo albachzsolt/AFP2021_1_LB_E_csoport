@@ -78,10 +78,6 @@ A fentiek alapján a fontosabb szempontok a következők:
 
 ### 6. Követelménylista 
 
-6.1. "User" felhasználói felület:
-
-
-6.2. "Admin" felhasználói felület:
 
 
 ### 7. Használati esetek
@@ -89,6 +85,17 @@ A fentiek alapján a fontosabb szempontok a következők:
 A felhasználó jogosult a termékek kosárba tételére, címének hozzáadására, rendelése állapotának megfigyelésére. Illetve értékelni tudja a megvásárolt terméket, a kézhezkapás után.
 Az admin jogosult a felhasználók kezelésére, törlésére. Rendelés állapotának módosítására. Termékek hozzáadására, eltávolítására. Vevői értékelések megtekintésre.
 
+7.1. "User" felhasználói felület:
+  6.1.1. A főoldalon jelenjenek meg a termékek kategóriákra bontva. A felhasználó tudjon böngészni ezen termékek között, lássa a termék leírását, értékeléseit, árát. 
+  A vásárláshoz, illetve a kosárba helyezéshez bejelentkezés szükséges, amit a fejlécen található gombokkal tud megtenni. 
+  Bejelentkezés után tudjon kosárba helyezni, onnan eltávolítani termékeket, tudjon vásárolni, lássa a korábbi rendeléseit, kézhezvételt követően tudjon értékelést írni.
+
+7.2. "Admin" felhasználói felület:
+  6.2.2. Bejelentkezés után az "User" felhasználói felülethez hasonlóan a főoldalon minden olyan információ megjelenik, amit a felhasználó is láthat.
+    Láthassa, hogy milyen felhasználók vannak regisztrálva, legyen jogosult adatainak kezelésére, törlésére.
+    Láthassa a rendelések állapotát, legyen jogosult ezen rendelések módosítására, törlésére.
+    Láthassa, hogy milyen termékek vannak feltöltve az oldalra, láthassa ezek adatait, tudja módosítani, törölni, illetve új terméket hozzáadni.
+    Vevői értékelések megtekintése, módosítása, törlése.
 
 ### 8. Képernyő tervek
 
