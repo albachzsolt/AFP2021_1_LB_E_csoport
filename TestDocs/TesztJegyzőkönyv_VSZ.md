@@ -78,7 +78,6 @@
 | 10.  B | Megjelenik egy visszajelzés, miszerint a törlés sikertelen|Sikeres|
 | 10.  C | Az oldalon a kitörölni kívánt sor megjelenik |Sikeres|
 | 11.   | A táblázat sorainak végén található **Delivered** gombra kattintva megjelenik egy megerősítést kérő ablak|Sikeres|
-
 | 12.  A | Megerősítést követően az adott sor **Order status**-a **DELIVERED**-re módosul|Sikeres|
 | 12.  B | Megjelenik egy visszajelzés, miszerint sikeresen módosítottuk a rendelést|Sikeres|
 | 13.   | Az oldal alján a szűrők lenyíló menüjére kattintunk |Sikeres|
